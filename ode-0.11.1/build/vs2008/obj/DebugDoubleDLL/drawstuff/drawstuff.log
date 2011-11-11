@@ -1,0 +1,40 @@
+﻿Build started 11/3/2011 4:11:57 PM.
+     1>Project "C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\build\vs2008\drawstuff.vcxproj" on node 2 (build target(s)).
+     1>PrepareForBuild:
+         Creating directory "..\..\lib\DebugDoubleDLL\".
+       InitializeBuildStatus:
+         Creating "obj\DebugDoubleDLL\drawstuff\drawstuff.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../../include /I../../ode/src /ZI /nologo /W3 /WX- /Od /Oy- /D _DEBUG /D dDOUBLE /D WIN32 /D _CRT_SECURE_NO_DEPRECATE /D DS_DLL /D USRDLL /D _WINDLL /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"obj\DebugDoubleDLL\drawstuff\\" /Fd"..\..\lib\DebugDoubleDLL\drawstuff.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\drawstuff\src\drawstuff.cpp ..\..\drawstuff\src\windows.cpp
+         windows.cpp
+         drawstuff.cpp
+         Generating Code...
+       ResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _DEBUG /D dDOUBLE /D WIN32 /D _CRT_SECURE_NO_DEPRECATE /D DS_DLL /D USRDLL /l"0x0409" /I../../include /I../../ode/src /nologo /fo"obj\DebugDoubleDLL\drawstuff\resources.res" ..\..\drawstuff\src\resources.rc 
+       ManifestResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"obj\DebugDoubleDLL\drawstuff\drawstuff.dll.embed.manifest.res" obj\DebugDoubleDLL\drawstuff\drawstuff_manifest.rc 
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(990,5): warning MSB8012: TargetPath(C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\build\vs2008\..\..\lib\DebugDoubleDLL\drawstuff.dll) does not match the Linker's OutputFile property value (C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\lib\DebugDoubleDLL\drawstuffd.dll). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(992,5): warning MSB8012: TargetName(drawstuff) does not match the Linker's OutputFile property value (drawstuffd). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\..\lib\DebugDoubleDLL\drawstuffd.dll" /INCREMENTAL /NOLOGO user32.lib opengl32.lib glu32.lib winmm.lib gdi32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"obj\DebugDoubleDLL\drawstuff\drawstuff.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"..\..\lib\DebugDoubleDLL\drawstuff.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"..\..\lib\DebugDoubleDLL\drawstuffd.lib" /MACHINE:X86 /DLL obj\DebugDoubleDLL\drawstuff\resources.res
+         obj\DebugDoubleDLL\drawstuff\drawstuff.dll.embed.manifest.res
+         obj\DebugDoubleDLL\drawstuff\drawstuff.obj
+         obj\DebugDoubleDLL\drawstuff\windows.obj
+            Creating library ..\..\lib\DebugDoubleDLL\drawstuffd.lib and object ..\..\lib\DebugDoubleDLL\drawstuffd.exp
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"obj\DebugDoubleDLL\drawstuff\drawstuff.dll.embed.manifest" /manifest obj\DebugDoubleDLL\drawstuff\drawstuff.dll.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"obj\DebugDoubleDLL\drawstuff\drawstuff.dll.embed.manifest.res" obj\DebugDoubleDLL\drawstuff\drawstuff_manifest.rc 
+       LinkEmbedManifest:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\..\lib\DebugDoubleDLL\drawstuffd.dll" /INCREMENTAL /NOLOGO user32.lib opengl32.lib glu32.lib winmm.lib gdi32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"obj\DebugDoubleDLL\drawstuff\drawstuff.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"..\..\lib\DebugDoubleDLL\drawstuff.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"..\..\lib\DebugDoubleDLL\drawstuffd.lib" /MACHINE:X86 /DLL obj\DebugDoubleDLL\drawstuff\resources.res
+         obj\DebugDoubleDLL\drawstuff\drawstuff.dll.embed.manifest.res
+         obj\DebugDoubleDLL\drawstuff\drawstuff.obj
+         obj\DebugDoubleDLL\drawstuff\windows.obj
+         drawstuff.vcxproj -> C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\build\vs2008\..\..\lib\DebugDoubleDLL\drawstuff.dll
+       FinalizeBuildStatus:
+         Deleting file "obj\DebugDoubleDLL\drawstuff\drawstuff.unsuccessfulbuild".
+         Touching "obj\DebugDoubleDLL\drawstuff\drawstuff.lastbuildstate".
+     1>Done Building Project "C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\build\vs2008\drawstuff.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:07.92

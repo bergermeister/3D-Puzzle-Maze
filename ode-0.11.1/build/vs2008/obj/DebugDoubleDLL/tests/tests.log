@@ -1,0 +1,125 @@
+﻿Build started 11/3/2011 4:15:14 PM.
+     1>Project "C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\build\vs2008\tests.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "obj\DebugDoubleDLL\tests\tests.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../../include /I../../ode/src /I../../tests/UnitTest++/src /ZI /nologo /W3 /WX- /Od /Oy- /D _DEBUG /D dDOUBLE /D WIN32 /D _CRT_SECURE_NO_DEPRECATE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"obj\DebugDoubleDLL\tests\\" /Fd"..\..\lib\DebugDoubleDLL\tests.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\tests\joints\ball.cpp ..\..\tests\joints\fixed.cpp ..\..\tests\joints\hinge.cpp ..\..\tests\joints\hinge2.cpp ..\..\tests\joints\piston.cpp ..\..\tests\joints\pr.cpp ..\..\tests\joints\pu.cpp ..\..\tests\joints\slider.cpp ..\..\tests\joints\universal.cpp ..\..\tests\UnitTest++\src\Win32\TimeHelpers.cpp ..\..\tests\UnitTest++\src\AssertException.cpp ..\..\tests\UnitTest++\src\Checks.cpp ..\..\tests\UnitTest++\src\DeferredTestReporter.cpp ..\..\tests\UnitTest++\src\DeferredTestResult.cpp ..\..\tests\UnitTest++\src\MemoryOutStream.cpp ..\..\tests\UnitTest++\src\ReportAssert.cpp ..\..\tests\UnitTest++\src\Test.cpp ..\..\tests\UnitTest++\src\TestDetails.cpp ..\..\tests\UnitTest++\src\TestList.cpp ..\..\tests\UnitTest++\src\TestReporter.cpp ..\..\tests\UnitTest++\src\TestReporterStdout.cpp ..\..\tests\UnitTest++\src\TestResults.cpp ..\..\tests\UnitTest++\src\TestRunner.cpp ..\..\tests\UnitTest++\src\TimeConstraint.cpp ..\..\tests\UnitTest++\src\XmlTestReporter.cpp ..\..\tests\collision.cpp ..\..\tests\joint.cpp ..\..\tests\main.cpp ..\..\tests\odemath.cpp
+         odemath.cpp
+         main.cpp
+         joint.cpp
+         collision.cpp
+         XmlTestReporter.cpp
+         TimeConstraint.cpp
+         TestRunner.cpp
+         TestResults.cpp
+         TestReporterStdout.cpp
+         TestReporter.cpp
+         TestList.cpp
+         TestDetails.cpp
+         Test.cpp
+         ReportAssert.cpp
+         MemoryOutStream.cpp
+         DeferredTestResult.cpp
+         DeferredTestReporter.cpp
+         Checks.cpp
+         AssertException.cpp
+         TimeHelpers.cpp
+         Generating Code...
+         Compiling...
+         universal.cpp
+         slider.cpp
+         pu.cpp
+         pr.cpp
+         piston.cpp
+     1>c:\users\ed\documents\visual studio 2010\ode-0.11.1\tests\joints\piston.cpp(118): warning C4996: 'dJointSetPistonAxisDelta': was declared deprecated
+                 c:\users\ed\documents\visual studio 2010\ode-0.11.1\include\ode\objects.h(2057) : see declaration of 'dJointSetPistonAxisDelta'
+     1>c:\users\ed\documents\visual studio 2010\ode-0.11.1\tests\joints\piston.cpp(765): warning C4996: 'dJointSetPistonAxisDelta': was declared deprecated
+                 c:\users\ed\documents\visual studio 2010\ode-0.11.1\include\ode\objects.h(2057) : see declaration of 'dJointSetPistonAxisDelta'
+         hinge2.cpp
+         hinge.cpp
+         fixed.cpp
+         ball.cpp
+         Generating Code...
+       ManifestResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"obj\DebugDoubleDLL\tests\tests.exe.embed.manifest.res" obj\DebugDoubleDLL\tests\tests_manifest.rc 
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\..\lib\DebugDoubleDLL\tests.exe" /INCREMENTAL /NOLOGO ..\..\lib\DebugDoubleDLL\ode_doubled.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"obj\DebugDoubleDLL\tests\tests.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"..\..\lib\DebugDoubleDLL\tests.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"..\..\lib\DebugDoubleDLL\tests.lib" /MACHINE:X86 obj\DebugDoubleDLL\tests\tests.exe.embed.manifest.res
+         obj\DebugDoubleDLL\tests\ball.obj
+         obj\DebugDoubleDLL\tests\fixed.obj
+         obj\DebugDoubleDLL\tests\hinge.obj
+         obj\DebugDoubleDLL\tests\hinge2.obj
+         obj\DebugDoubleDLL\tests\piston.obj
+         obj\DebugDoubleDLL\tests\pr.obj
+         obj\DebugDoubleDLL\tests\pu.obj
+         obj\DebugDoubleDLL\tests\slider.obj
+         obj\DebugDoubleDLL\tests\universal.obj
+         obj\DebugDoubleDLL\tests\TimeHelpers.obj
+         obj\DebugDoubleDLL\tests\AssertException.obj
+         obj\DebugDoubleDLL\tests\Checks.obj
+         obj\DebugDoubleDLL\tests\DeferredTestReporter.obj
+         obj\DebugDoubleDLL\tests\DeferredTestResult.obj
+         obj\DebugDoubleDLL\tests\MemoryOutStream.obj
+         obj\DebugDoubleDLL\tests\ReportAssert.obj
+         obj\DebugDoubleDLL\tests\Test.obj
+         obj\DebugDoubleDLL\tests\TestDetails.obj
+         obj\DebugDoubleDLL\tests\TestList.obj
+         obj\DebugDoubleDLL\tests\TestReporter.obj
+         obj\DebugDoubleDLL\tests\TestReporterStdout.obj
+         obj\DebugDoubleDLL\tests\TestResults.obj
+         obj\DebugDoubleDLL\tests\TestRunner.obj
+         obj\DebugDoubleDLL\tests\TimeConstraint.obj
+         obj\DebugDoubleDLL\tests\XmlTestReporter.obj
+         obj\DebugDoubleDLL\tests\collision.obj
+         obj\DebugDoubleDLL\tests\joint.obj
+         obj\DebugDoubleDLL\tests\main.obj
+         obj\DebugDoubleDLL\tests\odemath.obj
+         "C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\lib\DebugDoubleDLL\ode_doubled.lib"
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"obj\DebugDoubleDLL\tests\tests.exe.embed.manifest" /manifest obj\DebugDoubleDLL\tests\tests.exe.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"obj\DebugDoubleDLL\tests\tests.exe.embed.manifest.res" obj\DebugDoubleDLL\tests\tests_manifest.rc 
+       LinkEmbedManifest:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\..\lib\DebugDoubleDLL\tests.exe" /INCREMENTAL /NOLOGO ..\..\lib\DebugDoubleDLL\ode_doubled.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"obj\DebugDoubleDLL\tests\tests.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"..\..\lib\DebugDoubleDLL\tests.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"..\..\lib\DebugDoubleDLL\tests.lib" /MACHINE:X86 obj\DebugDoubleDLL\tests\tests.exe.embed.manifest.res
+         obj\DebugDoubleDLL\tests\ball.obj
+         obj\DebugDoubleDLL\tests\fixed.obj
+         obj\DebugDoubleDLL\tests\hinge.obj
+         obj\DebugDoubleDLL\tests\hinge2.obj
+         obj\DebugDoubleDLL\tests\piston.obj
+         obj\DebugDoubleDLL\tests\pr.obj
+         obj\DebugDoubleDLL\tests\pu.obj
+         obj\DebugDoubleDLL\tests\slider.obj
+         obj\DebugDoubleDLL\tests\universal.obj
+         obj\DebugDoubleDLL\tests\TimeHelpers.obj
+         obj\DebugDoubleDLL\tests\AssertException.obj
+         obj\DebugDoubleDLL\tests\Checks.obj
+         obj\DebugDoubleDLL\tests\DeferredTestReporter.obj
+         obj\DebugDoubleDLL\tests\DeferredTestResult.obj
+         obj\DebugDoubleDLL\tests\MemoryOutStream.obj
+         obj\DebugDoubleDLL\tests\ReportAssert.obj
+         obj\DebugDoubleDLL\tests\Test.obj
+         obj\DebugDoubleDLL\tests\TestDetails.obj
+         obj\DebugDoubleDLL\tests\TestList.obj
+         obj\DebugDoubleDLL\tests\TestReporter.obj
+         obj\DebugDoubleDLL\tests\TestReporterStdout.obj
+         obj\DebugDoubleDLL\tests\TestResults.obj
+         obj\DebugDoubleDLL\tests\TestRunner.obj
+         obj\DebugDoubleDLL\tests\TimeConstraint.obj
+         obj\DebugDoubleDLL\tests\XmlTestReporter.obj
+         obj\DebugDoubleDLL\tests\collision.obj
+         obj\DebugDoubleDLL\tests\joint.obj
+         obj\DebugDoubleDLL\tests\main.obj
+         obj\DebugDoubleDLL\tests\odemath.obj
+         "C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\lib\DebugDoubleDLL\ode_doubled.lib"
+         tests.vcxproj -> C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\build\vs2008\..\..\lib\DebugDoubleDLL\tests.exe
+       PostBuildEvent:
+         ..\..\lib\DebugDoubleDLL\tests
+         :VCEnd
+         Success: 209 tests passed.
+         Test time: 0.36 seconds.
+       FinalizeBuildStatus:
+         Deleting file "obj\DebugDoubleDLL\tests\tests.unsuccessfulbuild".
+         Touching "obj\DebugDoubleDLL\tests\tests.lastbuildstate".
+     1>Done Building Project "C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\build\vs2008\tests.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:34.10

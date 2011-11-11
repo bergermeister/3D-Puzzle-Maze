@@ -1,0 +1,35 @@
+﻿Build started 11/3/2011 4:15:48 PM.
+     1>Project "C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\build\vs2008\demo_slider.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "obj\DebugDoubleDLL\demo_slider\demo_slider.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../../include /I../../ode/src /ZI /nologo /W3 /WX- /Od /Oy- /D _DEBUG /D dDOUBLE /D WIN32 /D _CRT_SECURE_NO_DEPRECATE /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"obj\DebugDoubleDLL\demo_slider\\" /Fd"..\..\lib\DebugDoubleDLL\demo_slider.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\ode\demo\demo_slider.cpp
+         demo_slider.cpp
+       ResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _DEBUG /D dDOUBLE /D WIN32 /D _CRT_SECURE_NO_DEPRECATE /l"0x0409" /I../../include /I../../ode/src /nologo /fo"obj\DebugDoubleDLL\demo_slider\resources.res" ..\..\drawstuff\src\resources.rc 
+       ManifestResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"obj\DebugDoubleDLL\demo_slider\demo_slider.exe.embed.manifest.res" obj\DebugDoubleDLL\demo_slider\demo_slider_manifest.rc 
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\..\lib\DebugDoubleDLL\demo_slider.exe" /INCREMENTAL /NOLOGO ..\..\lib\DebugDoubleDLL\ode_doubled.lib ..\..\lib\DebugDoubleDLL\drawstuffd.lib user32.lib winmm.lib gdi32.lib opengl32.lib glu32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"obj\DebugDoubleDLL\demo_slider\demo_slider.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"..\..\lib\DebugDoubleDLL\demo_slider.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"..\..\lib\DebugDoubleDLL\demo_slider.lib" /MACHINE:X86 obj\DebugDoubleDLL\demo_slider\resources.res
+         obj\DebugDoubleDLL\demo_slider\demo_slider.exe.embed.manifest.res
+         obj\DebugDoubleDLL\demo_slider\demo_slider.obj
+         "C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\lib\DebugDoubleDLL\drawstuffd.lib"
+         "C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\lib\DebugDoubleDLL\ode_doubled.lib"
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"obj\DebugDoubleDLL\demo_slider\demo_slider.exe.embed.manifest" /manifest obj\DebugDoubleDLL\demo_slider\demo_slider.exe.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"obj\DebugDoubleDLL\demo_slider\demo_slider.exe.embed.manifest.res" obj\DebugDoubleDLL\demo_slider\demo_slider_manifest.rc 
+       LinkEmbedManifest:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\..\lib\DebugDoubleDLL\demo_slider.exe" /INCREMENTAL /NOLOGO ..\..\lib\DebugDoubleDLL\ode_doubled.lib ..\..\lib\DebugDoubleDLL\drawstuffd.lib user32.lib winmm.lib gdi32.lib opengl32.lib glu32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"obj\DebugDoubleDLL\demo_slider\demo_slider.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"..\..\lib\DebugDoubleDLL\demo_slider.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"..\..\lib\DebugDoubleDLL\demo_slider.lib" /MACHINE:X86 obj\DebugDoubleDLL\demo_slider\resources.res
+         obj\DebugDoubleDLL\demo_slider\demo_slider.exe.embed.manifest.res
+         obj\DebugDoubleDLL\demo_slider\demo_slider.obj
+         "C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\lib\DebugDoubleDLL\drawstuffd.lib"
+         "C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\lib\DebugDoubleDLL\ode_doubled.lib"
+         demo_slider.vcxproj -> C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\build\vs2008\..\..\lib\DebugDoubleDLL\demo_slider.exe
+       FinalizeBuildStatus:
+         Deleting file "obj\DebugDoubleDLL\demo_slider\demo_slider.unsuccessfulbuild".
+         Touching "obj\DebugDoubleDLL\demo_slider\demo_slider.lastbuildstate".
+     1>Done Building Project "C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\build\vs2008\demo_slider.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.15

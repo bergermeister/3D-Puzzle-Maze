@@ -1,0 +1,45 @@
+-- Dynamics Interchange Format v0.1
+
+Xworld = dynamics.world {
+	gravity = {0,0,-0.5},
+	ODE = {
+		ERP = 0.2,
+		CFM = 1e-005,
+		auto_disable = {
+			linear_threshold = 0.0001,
+			angular_threshold = 0.0001,
+			average_samples = 10,
+			idle_time = 0,
+			idle_steps = 10,
+		},
+	},
+}
+Xbody = {}
+Xbody[0] = dynamics.body {
+	world = Xworld,
+	pos = {0.243614974721245,-0.231845258090609,2.66766689792477},
+	q = {0.709949132853364,-0.354801517368422,-0.0337379623495517,-0.607412431491422},
+	lvel = {0,0,-0.01},
+	avel = {0,0,0},
+	mass = 0.0271357114598718,
+	I = {{0.000128999968223379,0,0},{0,0.000128999968223379,0},{0,0,0.000128999968223379}},
+	ODE = {
+		disabled = 1,
+		auto_disable = {
+			linear_threshold = 0.0001,
+			angular_threshold = 0.0001,
+			average_samples = 10,
+			idle_time = 0,
+			idle_steps = 10,
+			time_left = 0,
+			steps_left = 10,
+		},
+	},
+	geometry = {
+		{
+			type = "sphere",
+			radius = 0.109016993224858,
+		},
+	},
+}
+Xjoint = {}

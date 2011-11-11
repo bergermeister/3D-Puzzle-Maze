@@ -1,0 +1,27 @@
+﻿Build started 11/3/2011 5:21:25 PM.
+     1>Project "C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\build\vs2008\drawstuff.vcxproj" on node 3 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "obj\DebugSingleLib\drawstuff\drawstuff.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../../include /I../../ode/src /ZI /nologo /W3 /WX- /Od /Oy- /D _DEBUG /D dSINGLE /D WIN32 /D _CRT_SECURE_NO_DEPRECATE /D DS_LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"obj\DebugSingleLib\drawstuff\\" /Fd"..\..\lib\DebugSingleLib\drawstuff.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\drawstuff\src\drawstuff.cpp ..\..\drawstuff\src\windows.cpp
+         windows.cpp
+         drawstuff.cpp
+         Generating Code...
+       ResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _DEBUG /D dSINGLE /D WIN32 /D _CRT_SECURE_NO_DEPRECATE /D DS_LIB /l"0x0409" /I../../include /I../../ode/src /nologo /fo"obj\DebugSingleLib\drawstuff\resources.res" ..\..\drawstuff\src\resources.rc 
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(1151,5): warning MSB8012: TargetPath(C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\build\vs2008\..\..\lib\DebugSingleLib\drawstuff.lib) does not match the Library's OutputFile property value (C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\lib\DebugSingleLib\drawstuffd.lib). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Lib.OutputFile).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppBuild.targets(1153,5): warning MSB8012: TargetName(drawstuff) does not match the Library's OutputFile property value (drawstuffd). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Lib.OutputFile).
+       Lib:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"..\..\lib\DebugSingleLib\drawstuffd.lib" /NOLOGO obj\DebugSingleLib\drawstuff\resources.res
+         obj\DebugSingleLib\drawstuff\drawstuff.obj
+         obj\DebugSingleLib\drawstuff\windows.obj
+     1>LINK : warning LNK4068: /MACHINE not specified; defaulting to X86
+         drawstuff.vcxproj -> C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\build\vs2008\..\..\lib\DebugSingleLib\drawstuff.lib
+       FinalizeBuildStatus:
+         Deleting file "obj\DebugSingleLib\drawstuff\drawstuff.unsuccessfulbuild".
+         Touching "obj\DebugSingleLib\drawstuff\drawstuff.lastbuildstate".
+     1>Done Building Project "C:\Users\Ed\Documents\Visual Studio 2010\ode-0.11.1\build\vs2008\drawstuff.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.33
