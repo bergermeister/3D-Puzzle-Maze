@@ -107,7 +107,8 @@ void testApp::drawFigures()
 			glVertex3f(790, 590, 0.0f);
 			glTexCoord2f(0, 1);
 			glVertex3f(780, 590, 0.0f);
-			glEnd();  
+			glEnd();
+			shm->x--;
 			break;
 		case 2:  //right
 			glColor3f(0.0, 0.0, 1.0);    //blue
@@ -120,7 +121,8 @@ void testApp::drawFigures()
 			glVertex3f(790, 590, 0.0f);
 			glTexCoord2f(0, 1);
 			glVertex3f(780, 590, 0.0f);
-			glEnd();  
+			glEnd();
+			shm->x++;
 			break;
 	}
 		
@@ -136,7 +138,9 @@ void testApp::drawFigures()
 		glVertex3f(790, 590, 0.0f);
 		glTexCoord2f(0, 1);
 		glVertex3f(800, 590, 0.0f);
-		glEnd();  
+		glEnd();
+		shm->y++;
+		shm->s+=0.3;
 		break;
 	case 2:   //back -- stop
 		glColor3f(0.0, 0.0, 0.0);    //black
@@ -149,6 +153,7 @@ void testApp::drawFigures()
 		glVertex3f(790, 590, 0.0f);
 		glTexCoord2f(0, 1);
 		glVertex3f(800, 590, 0.0f);
+		shm->s = 0;
 		glEnd();  
 		break;
 	

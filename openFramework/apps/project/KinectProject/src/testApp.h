@@ -12,6 +12,8 @@
 #include "HandTracking.h"
 #include "Draggable.h"
 
+#include "shared_data.h"
+
 #define dsDrawSphere dsDrawSphereD
 //#define dsDrawLine   dsDrawLineD
 #define RADIUS 25		// wheel radius
@@ -52,6 +54,8 @@ public:
 
 class testApp : public ofBaseApp {
 public:
+	struct shared_data * shm;
+	testApp(struct shared_data * data){shm = data;};
 	void setup();
 	void update();
 	void draw();
