@@ -164,7 +164,8 @@ static void start()
 	dAllocateODEDataForThread(dAllocateMaskAll);
 	//static float xyz[3] = {3.8548f,9.0843f,7.5900f};
 	static float xyz[3]={shm2->x, shm2->y, shm2->z};
-	static float hpr[3] = {-145.5f,-22.5f,0.25f};
+	//static float hpr[3] = {-145.5f,-22.5f,0.25f};
+	static float hpr[3]={shm2->h, shm2->p, shm2->r};
 	dsSetViewpoint (xyz,hpr);
 	printf ("Press:\t'a' to increase speed.\n"
 			"\t'z' to decrease speed.\n"
@@ -505,9 +506,14 @@ static void command (int cmd)
 static void simLoop (int pause)
 {
 	int i, j;
-		
+
 	dsSetTexture (DS_WOOD);
-	static float xyz[3]={shm2->x, shm2->y, shm2->z};
+
+	float xyz[3]={shm2->x, shm2->y, shm2->z};
+	float hpr[3] = {shm2->h, shm2->p, shm2->r};
+	//float hpr[3] = {-145.5f,-22.5f,0.25f};
+	dsSetViewpoint (xyz,hpr);
+
 	if (!pause) {
 #ifdef BOX
 		dBodyAddForce(body[bodies-1],lspeed,0,0);
@@ -645,6 +651,9 @@ int main (int argc, char **argv)
 	shm2->x=3.8548f;
 	shm2->y=9.0843f;
 	shm2->z=7.5900f;
+	shm2->h=-145.5f;
+	shm2->p=-22.5f;
+	shm2->r=0.25f;
 	shm2->s=0;
 
 	doFast = true;

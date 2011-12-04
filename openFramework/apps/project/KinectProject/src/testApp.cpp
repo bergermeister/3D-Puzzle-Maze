@@ -108,7 +108,10 @@ void testApp::drawFigures()
 			glTexCoord2f(0, 1);
 			glVertex3f(780, 590, 0.0f);
 			glEnd();
-			shm->x--;
+			if(shm->h >= 360)
+				shm->h = 0;
+			else
+				shm->h+=5;
 			break;
 		case 2:  //right
 			glColor3f(0.0, 0.0, 1.0);    //blue
@@ -122,10 +125,13 @@ void testApp::drawFigures()
 			glTexCoord2f(0, 1);
 			glVertex3f(780, 590, 0.0f);
 			glEnd();
-			shm->x++;
+			if(shm->h <= 0)
+				shm->h = 360;
+			else
+				shm->h-= 5;
 			break;
 	}
-		
+	
 	switch(footF){
 	case 1:   //up
 		glColor3f(0.0, 1.0, 1.0);    //light blue
@@ -139,8 +145,9 @@ void testApp::drawFigures()
 		glTexCoord2f(0, 1);
 		glVertex3f(800, 590, 0.0f);
 		glEnd();
-		shm->y++;
-		shm->s+=0.3;
+		shm->x += cos(shm->h * PI / 180);
+		shm->y += sin(shm->h * PI / 180);
+		//shm->s+=0.3;
 		break;
 	case 2:   //back -- stop
 		glColor3f(0.0, 0.0, 0.0);    //black
@@ -544,7 +551,8 @@ void testApp::draw() {
 		
 	// Display some debugging info
 	char reportStr[1024];
-	sprintf(reportStr, "left: %i right: %i foot: %i", leftDown, rightDown, footDown);
+	//sprintf(reportStr, "left: %i right: %i foot: %i", leftDown, rightDown, footDown);
+	sprintf(reportStr, "left: %f right: %f foot: %f", shm->x, shm->y, shm->z);
 	ofDrawBitmapString(reportStr, 20, 800);
 	
 	drawFigures();
