@@ -28,9 +28,6 @@
 #include "texturepath.h"
 #include "testApp.h"
 #include <pthread.h>
-//#include <windows.h>
-
-
 
 #ifdef _MSC_VER
 #pragma warning(disable:4244 4305)  // for VC++, no precision loss complaints
@@ -51,6 +48,7 @@
 //#define STEPFAST 1
 
 // some constants
+
 #define LENGTH 3.5		// chassis length
 #define WIDTH 2.5		// chassis width
 #define HEIGHT 1.0		// chassis height
@@ -123,6 +121,7 @@ static int done[2]={0,1};
 static int argc_data;
 static char **argv_data;
 static dsFunctions fn_data;
+struct shared_data * shm2 = (struct shared_data *)malloc(sizeof(struct shared_data*));
 
 
 // this is called by dSpaceCollide when two objects in space are
@@ -163,9 +162,10 @@ static void nearCallback (void *data, dGeomID o1, dGeomID o2)
 static void start()
 {
 	dAllocateODEDataForThread(dAllocateMaskAll);
-
-	static float xyz[3] = {3.8548f,9.0843f,7.5900f};
-	static float hpr[3] = {-145.5f,-22.5f,0.25f};
+	//static float xyz[3] = {3.8548f,9.0843f,7.5900f};
+	static float xyz[3]={shm2->x, shm2->y, shm2->z};
+	//static float hpr[3] = {-145.5f,-22.5f,0.25f};
+	static float hpr[3]={shm2->h, shm2->p, shm2->r};
 	dsSetViewpoint (xyz,hpr);
 	printf ("Press:\t'a' to increase speed.\n"
 			"\t'z' to decrease speed.\n"
@@ -182,7 +182,6 @@ static void start()
 			"\t'-' to decrease AutoEnableDepth.\n"
 			"\t'r' to reset simulation.\n");
 }
-
 
 void makeCar(dReal x, dReal y, int &bodyI, int &jointI, int &boxI, int &sphereI)
 {
@@ -507,8 +506,13 @@ static void command (int cmd)
 static void simLoop (int pause)
 {
 	int i, j;
-		
+
 	dsSetTexture (DS_WOOD);
+
+	float xyz[3]={shm2->x, shm2->y, shm2->z};
+	float hpr[3] = {shm2->h, shm2->p, shm2->r};
+	//float hpr[3] = {-145.5f,-22.5f,0.25f};
+	dsSetViewpoint (xyz,hpr);
 
 	if (!pause) {
 #ifdef BOX
@@ -520,7 +524,7 @@ static void simLoop (int pause)
 			//dMessage (0,"curturn %e, turn %e, vel %e", curturn, turn, (turn-curturn)*1.0);
 			dJointSetHinge2Param(joint[j],dParamVel,(turn-curturn)*1.0);
 			dJointSetHinge2Param(joint[j],dParamFMax,dInfinity);
-			dJointSetHinge2Param(joint[j],dParamVel2,speed);
+			dJointSetHinge2Param(joint[j],dParamVel2,speed + shm2->s);
 			dJointSetHinge2Param(joint[j],dParamFMax2,FMAX);
 			dBodyEnable(dJointGetBody(joint[j],0));
 			dBodyEnable(dJointGetBody(joint[j],1));
@@ -632,7 +636,7 @@ void *threadSimK(void *arg)
 	
 	ofAppGlutWindow window;
 	ofSetupOpenGL(&window, 1024, 768, OF_WINDOW);
-	ofRunApp(new testApp());
+	ofRunApp(new testApp(shm2));
 
 	done[1]=1;
 	//pthread_exit(NULL);
@@ -643,6 +647,14 @@ int main (int argc, char **argv)
 {
 	pthread_t tid[2];
 	int count_thread=0;
+
+	shm2->x=3.8548f;
+	shm2->y=9.0843f;
+	shm2->z=7.5900f;
+	shm2->h=-145.5f;
+	shm2->p=-22.5f;
+	shm2->r=0.25f;
+	shm2->s=0;
 
 	doFast = true;
 	
@@ -683,7 +695,7 @@ int main (int argc, char **argv)
 		}
 		if(done[1])
 		{
-		 //  pthread_join(tid[1],NULL);
+		   pthread_join(tid[1],NULL);
 		   count_thread++;
 		   done[1]=0;
 		}
@@ -693,5 +705,8 @@ int main (int argc, char **argv)
 	dSpaceDestroy (space);
 	dWorldDestroy (world);
 	dCloseODE();
+
+	free(shm2);
+
 	return 0;
 }
