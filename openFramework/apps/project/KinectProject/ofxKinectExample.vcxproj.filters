@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvColorImage.cpp">
+      <Filter>addons\ofxOpenCV\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvContourFinder.cpp">
+      <Filter>addons\ofxOpenCV\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvFloatImage.cpp">
+      <Filter>addons\ofxOpenCV\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvGrayscaleImage.cpp">
+      <Filter>addons\ofxOpenCV\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvImage.cpp">
+      <Filter>addons\ofxOpenCV\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxOpenCv\src\ofxCvShortImage.cpp">
+      <Filter>addons\ofxOpenCV\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testApp.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxKinect\src\ofxKinect.cpp">
+      <Filter>addons\ofxKinect\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\demo_crash.cpp" />
+    <ClCompile Include="src\handtracking.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxCvConvexityDefects\src\ofxCvConvexityDefects.cpp">
+      <Filter>addons\ofxCvConvexityDefects\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\myGUI\Controls\ControlBase.cpp" />
+    <ClCompile Include="src\myGUI\Controls\FadableBase.cpp" />
+    <ClCompile Include="src\myGUI\Controls\MyButton.cpp" />
+    <ClCompile Include="src\myGUI\Controls\MyCameraManager.cpp" />
+    <ClCompile Include="src\myGUI\Controls\MyPanel.cpp" />
+    <ClCompile Include="src\myGUI\Controls\MyRadioButtons.cpp" />
+    <ClCompile Include="src\myGUI\Controls\MyScroller.cpp" />
+    <ClCompile Include="src\myGUI\Controls\MyScrollList.cpp" />
+    <ClCompile Include="src\myGUI\Controls\MySlider.cpp" />
+    <ClCompile Include="src\myGUI\Controls\MySlider2d.cpp" />
+    <ClCompile Include="src\myGUI\Controls\MyToggle.cpp" />
+    <ClCompile Include="src\myGUI\Controls\MyVideoPlayer.cpp" />
+    <ClCompile Include="src\myGUI\Controls\MyVideoPlayerPlus.cpp" />
+    <ClCompile Include="src\myGUI\MyGUI.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxMSAInteractiveObject\src\ofxMSAInteractiveObject.cpp">
+      <Filter>addons\ofxMSAInteractiveObject\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp">
+      <Filter>addons\ofxXmlSettings\scr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp">
+      <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp">
+      <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
+      <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvBlob.h">
+      <Filter>addons\ofxOpenCV\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvShortImage.h">
+      <Filter>addons\ofxOpenCV\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvColorImage.h">
+      <Filter>addons\ofxOpenCV\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvConstants.h">
+      <Filter>addons\ofxOpenCV\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvContourFinder.h">
+      <Filter>addons\ofxOpenCV\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvFloatImage.h">
+      <Filter>addons\ofxOpenCV\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvGrayscaleImage.h">
+      <Filter>addons\ofxOpenCV\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvImage.h">
+      <Filter>addons\ofxOpenCV\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvMain.h">
+      <Filter>addons\ofxOpenCV\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxOpenCv.h">
+      <Filter>addons\ofxOpenCV\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\testApp.h" />
+    <ClInclude Include="..\..\..\addons\ofxKinect\src\ofxBase3DVideo.h">
+      <Filter>addons\ofxKinect\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxKinect\src\ofxKinect.h">
+      <Filter>addons\ofxKinect\src</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="src\contourSimplify.h" />
+    <ClInclude Include="src\polylineSimplify.h" />
+    <ClInclude Include="src\convexHull.h" />
+    <ClInclude Include="src\draggable.h" />
+    <ClInclude Include="src\handtracking.h" />
+    <ClInclude Include="..\..\..\addons\ofxCvConvexityDefects\src\ofxCvBlobWithDefects.h">
+      <Filter>addons\ofxCvConvexityDefects\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCvConvexityDefects\src\ofxCvConvexityDefects.h">
+      <Filter>addons\ofxCvConvexityDefects\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\myGUI\Controls\ControlBase.h" />
+    <ClInclude Include="src\myGUI\Controls\ControlColorScheme.h" />
+    <ClInclude Include="src\myGUI\Controls\ControlEvent.h" />
+    <ClInclude Include="src\myGUI\Controls\ControlIncludes.h" />
+    <ClInclude Include="src\myGUI\Controls\FadableBase.h" />
+    <ClInclude Include="src\myGUI\Controls\FadableCam.h" />
+    <ClInclude Include="src\myGUI\Controls\FadableCvGrayImage.h" />
+    <ClInclude Include="src\myGUI\Controls\FadableVideo.h" />
+    <ClInclude Include="src\myGUI\Controls\FadeToBlack.h" />
+    <ClInclude Include="src\myGUI\Controls\MyButton.h" />
+    <ClInclude Include="src\myGUI\Controls\MyCameraManager.h" />
+    <ClInclude Include="src\myGUI\Controls\MyPanel.h" />
+    <ClInclude Include="src\myGUI\Controls\MyRadioButtons.h" />
+    <ClInclude Include="src\myGUI\Controls\MyScroller.h" />
+    <ClInclude Include="src\myGUI\Controls\MyScrollList.h" />
+    <ClInclude Include="src\myGUI\Controls\MySlider.h" />
+    <ClInclude Include="src\myGUI\Controls\MySlider2d.h" />
+    <ClInclude Include="src\myGUI\Controls\MyToggle.h" />
+    <ClInclude Include="src\myGUI\Controls\MyVideoPlayer.h" />
+    <ClInclude Include="src\myGUI\Controls\MyVideoPlayerPlus.h" />
+    <ClInclude Include="src\myGUI\MyGUI.h" />
+    <ClInclude Include="..\..\..\addons\ofxMSAInteractiveObject\src\ofxMSAInteractiveObject.h">
+      <Filter>addons\ofxMSAInteractiveObject\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxMSAInteractiveObject\src\ofxMSAInteractiveObjectDelegate.h">
+      <Filter>addons\ofxMSAInteractiveObject\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h">
+      <Filter>addons\ofxXmlSettings\scr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
+      <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="addons">
+      <UniqueIdentifier>{fb9e352c-c0b7-4a51-8394-a95887d8e1e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOpenCV">
+      <UniqueIdentifier>{d6eac2d3-90b8-45fa-ba9a-e2c34eea2695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxOpenCV\src">
+      <UniqueIdentifier>{6edcfb1c-6e19-4657-9a6a-ee5ff2cf563f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxKinect">
+      <UniqueIdentifier>{17dbc44a-7c2f-4ca0-87d4-63ba5d377287}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxKinect\src">
+      <UniqueIdentifier>{47c6e6ca-2b36-4fd0-996d-ccd2530b274a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxCvConvexityDefects">
+      <UniqueIdentifier>{ec128142-7fac-4d8d-acf6-f6189474b1bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxCvConvexityDefects\src">
+      <UniqueIdentifier>{55e7a192-55ac-4e56-94ff-88e550e92477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxXmlSettings">
+      <UniqueIdentifier>{3d0e6f75-d73e-4567-909c-9ad63c542aa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxXmlSettings\libs">
+      <UniqueIdentifier>{6ffce3cf-819c-4a85-9630-88f330665e38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxXmlSettings\scr">
+      <UniqueIdentifier>{6a398ff0-6686-4e15-9b08-4ae480a667c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxMSAInteractiveObject">
+      <UniqueIdentifier>{26a0870e-3057-4014-b1ac-1dc3b7b83fb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxMSAInteractiveObject\src">
+      <UniqueIdentifier>{30aae549-fb75-4510-9df6-01ff85f0d0c2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ofxKinectExample.rc" />
+    <ResourceCompile Include="..\ode-0.11.1\drawstuff\src\resources.rc" />
+  </ItemGroup>
+</Project>
