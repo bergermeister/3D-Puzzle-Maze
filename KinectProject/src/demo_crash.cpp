@@ -44,7 +44,7 @@ class MazeReader
 public:
 	MazeReader() {
 		char a;
-		file.open("C:/maze.txt");
+		file.open("maze.txt");
 		if (!file.is_open()) {
 			cout << "FAIL" << endl;
 		}
@@ -87,7 +87,7 @@ MazeReader mazereader;
 #define CMASS 1			// chassis mass
 #define WMASS 1			// wheel mass
 #define COMOFFSET -5		// center of mass offset
-#define WALLMASS 1		// wall box mass
+#define WALLMASS 10		// wall box mass
 #define BALLMASS 1		// ball mass
 #define FMAX 25			// car engine fmax
 #define ROWS 1			// rows of cars
@@ -314,7 +314,7 @@ void resetSimulation()
 #ifdef CARS
 	for (dReal x = 0.0; x < COLS*(LENGTH+RADIUS); x += LENGTH+RADIUS)
 		for (dReal y = -((ROWS-1)*(WIDTH/2+RADIUS)); y <= ((ROWS-1)*(WIDTH/2+RADIUS)); y += WIDTH+RADIUS*2)
-			makeCar(x, y, bodies, joints, boxes, spheres);
+			makeCar(x+10, y, bodies, joints, boxes, spheres);
 #endif
 #ifdef WALL
 	bool offset = false;
@@ -345,6 +345,18 @@ void resetSimulation()
 			dBodySetPosition (wall_bodies[wb],-WBOXSIZE*col,-WBOXSIZE*row,10);
 			dMassSetBox (&m,1,WBOXSIZE,WBOXSIZE,WBOXSIZE);
 			dMassAdjust (&m, WALLMASS);
+			dBodySetMass (wall_bodies[wb],&m);
+			wall_boxes[wb] = dCreateBox (space,WBOXSIZE,WBOXSIZE,WBOXSIZE);
+			dGeomSetBody (wall_boxes[wb],wall_bodies[wb]);
+			//dBodyDisable(wall_bodies[wb++]);
+			wb++;
+			col++;
+		}
+		else if (maze[z] == '#') {
+			wall_bodies[wb] = dBodyCreate (world);
+			dBodySetPosition (wall_bodies[wb],-WBOXSIZE*col,-WBOXSIZE*row,10);
+			dMassSetBox (&m,1,WBOXSIZE,WBOXSIZE,WBOXSIZE);
+			dMassAdjust (&m, .5);
 			dBodySetMass (wall_bodies[wb],&m);
 			wall_boxes[wb] = dCreateBox (space,WBOXSIZE,WBOXSIZE,WBOXSIZE);
 			dGeomSetBody (wall_boxes[wb],wall_bodies[wb]);
