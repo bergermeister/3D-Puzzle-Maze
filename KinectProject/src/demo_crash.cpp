@@ -28,8 +28,35 @@
 #include "texturepath.h"
 #include "testApp.h"
 #include <pthread.h>
+#include <iostream>
+using namespace std;
 //#include <windows.h>
 
+static ifstream file;
+vector<char> maze;
+int row=0;
+int col=0;
+
+
+
+class MazeReader
+{
+public:
+	MazeReader() {
+		char a;
+		file.open("C:/maze.txt");
+		if (!file.is_open()) {
+			cout << "FAIL" << endl;
+		}
+		int i = 0;
+		while(!file.eof()) {
+			file>>a;
+			maze.push_back(a);
+		}
+	}
+};
+
+MazeReader mazereader;
 
 
 #ifdef _MSC_VER
@@ -51,6 +78,7 @@
 //#define STEPFAST 1
 
 // some constants
+
 #define LENGTH 3.5		// chassis length
 #define WIDTH 2.5		// chassis width
 #define HEIGHT 1.0		// chassis height
@@ -65,7 +93,7 @@
 #define ROWS 1			// rows of cars
 #define COLS 1			// columns of cars
 #define ITERS 20		// number of iterations
-#define WBOXSIZE 1.0		// size of wall boxes
+#define WBOXSIZE 3.0		// size of wall boxes
 #define WALLWIDTH 12		// width of wall
 #define WALLHEIGHT 10		// height of wall
 #define DISABLE_THRESHOLD 0.008	// maximum velocity (squared) a body can have and be disabled
@@ -183,7 +211,6 @@ static void start()
 			"\t'r' to reset simulation.\n");
 }
 
-
 void makeCar(dReal x, dReal y, int &bodyI, int &jointI, int &boxI, int &sphereI)
 {
 	int i;
@@ -291,13 +318,13 @@ void resetSimulation()
 #endif
 #ifdef WALL
 	bool offset = false;
-	for (dReal z = WBOXSIZE/2.0; z <= WALLHEIGHT; z+=WBOXSIZE)
+	/*for (dReal z = WBOXSIZE/2.0; z <= WALLHEIGHT; z+=WBOXSIZE)
 	{
 		offset = !offset;
 		for (dReal y = (-WALLWIDTH+z)/2; y <= (WALLWIDTH-z)/2; y+=WBOXSIZE)
 		{
 			wall_bodies[wb] = dBodyCreate (world);
-			dBodySetPosition (wall_bodies[wb],-20,y,z);
+			dBodySetPosition (wall_bodies[wb],-20,z,y);
 			dMassSetBox (&m,1,WBOXSIZE,WBOXSIZE,WBOXSIZE);
 			dMassAdjust (&m, WALLMASS);
 			dBodySetMass (wall_bodies[wb],&m);
@@ -305,6 +332,25 @@ void resetSimulation()
 			dGeomSetBody (wall_boxes[wb],wall_bodies[wb]);
 			//dBodyDisable(wall_bodies[wb++]);
 			wb++;
+		}
+	}*/
+	cout << maze.size() << endl;
+	for (int z= 0; z < maze.size(); z++) {
+		if (maze[z] == 'e') {
+			row++;
+			col=0;
+		}
+		else if (maze[z] == '*') {
+			wall_bodies[wb] = dBodyCreate (world);
+			dBodySetPosition (wall_bodies[wb],-WBOXSIZE*col,-WBOXSIZE*row,10);
+			dMassSetBox (&m,1,WBOXSIZE,WBOXSIZE,WBOXSIZE);
+			dMassAdjust (&m, WALLMASS);
+			dBodySetMass (wall_bodies[wb],&m);
+			wall_boxes[wb] = dCreateBox (space,WBOXSIZE,WBOXSIZE,WBOXSIZE);
+			dGeomSetBody (wall_boxes[wb],wall_bodies[wb]);
+			//dBodyDisable(wall_bodies[wb++]);
+			wb++;
+			col++;
 		}
 	}
 	dMessage(0,"wall boxes: %i", wb);
@@ -683,7 +729,7 @@ int main (int argc, char **argv)
 		}
 		if(done[1])
 		{
-		 //  pthread_join(tid[1],NULL);
+		   pthread_join(tid[1],NULL);
 		   count_thread++;
 		   done[1]=0;
 		}
