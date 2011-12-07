@@ -24,6 +24,24 @@
       <Filter>addons\ofxKinect\src</Filter>
     </ClCompile>
     <ClCompile Include="src\demo_crash.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxCvConvexityDefects\src\ofxCvConvexityDefects.cpp">
+      <Filter>addons\ofxCvConvexityDefects\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxMSAInteractiveObject\src\ofxMSAInteractiveObject.cpp">
+      <Filter>addons\ofxMSAInteractiveObject\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp">
+      <Filter>addons\ofxXmlSettings\scr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp">
+      <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp">
+      <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
+      <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\addons\ofxOpenCv\src\ofxCvBlob.h">
@@ -64,6 +82,25 @@
       <Filter>addons\ofxKinect\src</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="..\..\..\addons\ofxCvConvexityDefects\src\ofxCvBlobWithDefects.h">
+      <Filter>addons\ofxCvConvexityDefects\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxCvConvexityDefects\src\ofxCvConvexityDefects.h">
+      <Filter>addons\ofxCvConvexityDefects\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxMSAInteractiveObject\src\ofxMSAInteractiveObject.h">
+      <Filter>addons\ofxMSAInteractiveObject\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxMSAInteractiveObject\src\ofxMSAInteractiveObjectDelegate.h">
+      <Filter>addons\ofxMSAInteractiveObject\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h">
+      <Filter>addons\ofxXmlSettings\scr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
+      <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shared_data.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="addons">
@@ -80,6 +117,27 @@
     </Filter>
     <Filter Include="addons\ofxKinect\src">
       <UniqueIdentifier>{47c6e6ca-2b36-4fd0-996d-ccd2530b274a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxCvConvexityDefects">
+      <UniqueIdentifier>{ec128142-7fac-4d8d-acf6-f6189474b1bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxCvConvexityDefects\src">
+      <UniqueIdentifier>{55e7a192-55ac-4e56-94ff-88e550e92477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxXmlSettings">
+      <UniqueIdentifier>{3d0e6f75-d73e-4567-909c-9ad63c542aa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxXmlSettings\libs">
+      <UniqueIdentifier>{6ffce3cf-819c-4a85-9630-88f330665e38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxXmlSettings\scr">
+      <UniqueIdentifier>{6a398ff0-6686-4e15-9b08-4ae480a667c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxMSAInteractiveObject">
+      <UniqueIdentifier>{26a0870e-3057-4014-b1ac-1dc3b7b83fb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxMSAInteractiveObject\src">
+      <UniqueIdentifier>{30aae549-fb75-4510-9df6-01ff85f0d0c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

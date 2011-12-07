@@ -1,5 +1,5 @@
-﻿Build started 11/19/2011 8:57:54 AM.
-     1>Project "C:\Users\montem\Desktop\graphics_temp\ode-0.11.1\build\test\demo_crash.vcxproj" on node 2 (build target(s)).
+﻿Build started 11/24/2011 5:02:19 PM.
+     1>Project "C:\Users\montem\Documents\openFramework\apps\project\ode-0.11.1\build\test\demo_crash.vcxproj" on node 2 (build target(s)).
      1>C:\Windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.Common.Targets(1200,9): warning : The referenced project 'drawstuff.vcxproj' does not exist.
      1>C:\Windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.Common.Targets(1200,9): warning : The referenced project 'ode.vcxproj' does not exist.
      1>InitializeBuildStatus:
@@ -20,12 +20,12 @@
          All outputs are up-to-date.
        LinkEmbedManifest:
          All outputs are up-to-date.
-         demo_crash.vcxproj -> C:\Users\montem\Desktop\graphics_temp\ode-0.11.1\build\test\..\..\lib\DebugDoubleDLL\demo_crash.exe
+         demo_crash.vcxproj -> C:\Users\montem\Documents\openFramework\apps\project\ode-0.11.1\build\test\..\..\lib\DebugDoubleDLL\demo_crash.exe
        FinalizeBuildStatus:
          Deleting file "obj\DebugDoubleDLL\demo_crash\demo_crash.unsuccessfulbuild".
          Touching "obj\DebugDoubleDLL\demo_crash\demo_crash.lastbuildstate".
-     1>Done Building Project "C:\Users\montem\Desktop\graphics_temp\ode-0.11.1\build\test\demo_crash.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\montem\Documents\openFramework\apps\project\ode-0.11.1\build\test\demo_crash.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.32
+Time Elapsed 00:00:07.25

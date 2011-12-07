@@ -23,6 +23,6 @@
 // Sourceforge tests require the textures in the drawstuff folder
 
 #ifndef DRAWSTUFF_TEXTURE_PATH
-#define DRAWSTUFF_TEXTURE_PATH "../../drawstuff/textures"
+#define DRAWSTUFF_TEXTURE_PATH "../../../apps/project/ode-0.11.1/drawstuff/textures"
 #endif
 
