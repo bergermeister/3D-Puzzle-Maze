@@ -180,17 +180,6 @@ void testApp::setup() {
 	//kinect.init(false, false); // disable video image (faster fps)
 	
 	kinect.open();
-	// HAND T.
-	/*ofEnableSmoothing(); 
-	bWasHandOpen = false;
-	oldNumBlobs = 0;
-	
-	bSetup = true;
-	bHandBusy = false;
-	for(int i=0; i<20; ++i){draggables.push_back( Draggable() );}
-
-	kinect.getCalibratedColorAt(60, 230);*/
-	
 
 	//Allocate space for all images
 	colorImg.allocate(kinect.width, kinect.height);
@@ -252,7 +241,6 @@ void testApp::update() {
 	
 	//clearing old collision lines
 	physics.lines=0;
-	simpleContours.clear();
 
 	// load grayscale depth image from the kinect source
 	grayImage.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
@@ -275,155 +263,7 @@ void testApp::update() {
 	grayDiff -= grayBg;
 	colorDiff = colorImg;
 	colorDiff-=colorBg;
-	/*//Detecting Hand
-	handTracking.detect( kinect.getDepthPixels() );
-	//handTracking.filterDefects();
-
-	// Getting	Blobs
-	vector<ofxCvBlobWithDefects>& blobs = handTracking.getBlobs();
-	
-	bool bIsHandOpen = false;
-	ofPoint screenPos;
-	if(blobs.size() > 0)
-	{
-		ofxCvBlobWithDefects& blob = blobs.front();
-		screenPos = blobs.front().centroid;
-		screenPos.x *= (float)ofGetWidth() / 640.0f;
-		screenPos.y *= (float)ofGetHeight() / 480.0f;
-		int numDefects = blob.defects.size();
-		bIsHandOpen = numDefects >= 3;
-	}
-	else
-	{
-		bIsHandOpen = false;
-		bWasHandOpen = false;
-	}
-	
-	if(blobs.size() && oldNumBlobs) // && blobs.size()>0)
-	{
-		if(bIsHandOpen && !bWasHandOpen)
-		{
-			for(vector<Draggable>::iterator it = draggables.begin(); it != draggables.end(); ++it)
-			{
-				it->setDrag( false );
-			}
-			bHandBusy = false;
-		}
-		if(!bIsHandOpen && bWasHandOpen)
-		{
-			for(vector<Draggable>::iterator it = draggables.begin(); it != draggables.end(); ++it)
-			{
-				Draggable& draggable = *it;
-				if(draggable.isInside(screenPos))
-				{
-					draggable.setDrag( true );
-					bHandBusy = true;
-					break;
-				}
-			}
-		}
-	}
-	
-	if(blobs.size())
-	{
-		for(vector<Draggable>::iterator it = draggables.begin(); it != draggables.end(); ++it)
-		{
-			Draggable& draggable = *it;
-			if(!bIsHandOpen && draggable.isDrag())
-			{
-				draggable.goTo( screenPos );
-			}
-			else
-			{
-				if(bHandBusy) continue;
-				draggable.isInside( screenPos );
-			}
-		}
-	}
-	
-	if(!oldNumBlobs && !blobs.size())
-	{
-		bIsHandOpen = false;
-		bWasHandOpen = false;
-	}
-	
-	bWasHandOpen = bIsHandOpen;
-	oldNumBlobs = blobs.size();
-	
-	for(vector<Draggable>::iterator it = draggables.begin(); it != draggables.end(); it++)
-	{
-		it->update();
-	}*/
-
-	// there is a new frame and we are connected
-
-	/*
-	if(kinect.isFrameNew())
-	{
-		// we do two thresholds - one for the far plane and one for the near plane
-		// we then do a cvAnd to get the pixels which are a union of the two thresholds
-		if(bThreshWithOpenCV) {
-			grayThreshNear = grayImage;
-			grayThreshFar = grayImage;
-			grayThreshNear.threshold(nearThreshold, true);
-			grayThreshFar.threshold(farThreshold);
-			cvAnd(grayThreshNear.getCvImage(), grayThreshFar.getCvImage(), grayImage.getCvImage(), NULL);
-		} 
-		else 
-		{	
-			// or we do it ourselves - show people how they can work with the pixels
-			unsigned char * pix = grayImage.getPixels();
 			
-			int numPixels = grayImage.getWidth() * grayImage.getHeight();
-			for(int i = 0; i < numPixels; i++) {
-				if(pix[i] < nearThreshold && pix[i] > farThreshold) {
-					pix[i] = 255;
-				} else {
-					pix[i] = 0;
-				}
-			}
-		}
-		contourFinder.findContours(grayDiff, 10, (kinect.width*kinect.height)/2, 20, false);
-
-		// getgting line contour for collisions
-		for(int i=0; i<contourFinder.blobs.size(); i++)
-		{
-			if (contourFinder.blobs[i].nPts != -1) 
-			{
-				int numPoints = contourFinder.blobs[i].nPts;
-				contourReg.clear();
-				contourSmooth.clear();
-				contourSimple.clear();
-				contourReg.assign(numPoints, ofxPoint2f());
-				contourSmooth.assign(numPoints, ofxPoint2f());
-			
-				for(int j = 0; j < numPoints; j++) { contourReg[j] = contourFinder.blobs[i].pts[j];}
-			
-				contourSimp.smooth(contourReg, contourSmooth, smoothPct);
-				contourSimp.simplify(contourSmooth, contourSimple, tolerance);
-				simpleContours.push_back(contourSimple);
-			}
-		}
-
-		for (float f = 0;f<contourSimple.size(); f++) 
-		{
-			vector<float> temp;
-			temp.push_back(contourSimple[f].x);
-			temp.push_back(1);
-			temp.push_back(0);
-			//physics.contourX.push_back(temp);
-			temp.clear();
-			temp.push_back(contourSimple[f].y);
-			temp.push_back(contourSimple[f].y);
-			temp.push_back(1);
-			temp.push_back(0);
-			//physics.contourY.push_back(temp);
-			if(physics.lines<1000){	physics.newLine(contourSimple[f].x, kinect.height+contourSimple[f].y);}
-		}
-				
-	}
-	*/
-		
 	grayDiff.threshold(1);    // anything that is > 1 has changed, so keep it
 	grayDiff *= grayImage;    // multiply in the current depth values, to mask it 
 	//colorDiff *=colorImg;
@@ -557,29 +397,6 @@ void testApp::draw() {
 	
 	drawFigures();
 	
-	/*if(bSetup)
-	{
-		handTracking.drawSetup();
-		
-		glColor3f(1.0f, 1.0f, 1.0f);
-		ofPoint center = ofPoint(ofGetWidth() / 2.0f, ofGetHeight() / 2.0f );
-		glBegin(GL_LINES);
-		glVertex2f( center.x, center.y );
-		glVertex2f(center.x + (avgFlow.x * 5), center.y + (avgFlow.y * 5) );
-		glEnd();
-		
-	}
-	else
-	{
-		handTracking.draw();
-		for(vector<Draggable>::iterator it = draggables.begin(); it != draggables.end(); ++it)
-		{
-			it->draw();
-		}
-	}
-	glColor3f(1.0f, 1.0f, 1.0f);
-	kinect.getTextureReference().draw(ofGetWidth() - 180, ofGetHeight() - 140, 160, 120); 
-	*/
 	if(bDrawPointCloud) 
 	{
 		easyCam.begin();

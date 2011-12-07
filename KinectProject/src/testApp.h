@@ -7,10 +7,6 @@
 #include <ode/ode.h>
 #include <drawstuff/drawstuff.h>
 #include "texturepath.h"
-#include "contourSimplify.h"
-
-#include "HandTracking.h"
-#include "Draggable.h"
 
 #include "shared_data.h"
 
@@ -128,20 +124,6 @@ public:
 	bool bLearnBakground;
 	// distance at which depth map is "cut off"
 	int	threshold;
-
-	//for simple contour and become it into collision contour
-	contourSimplify contourSimp;
-	vector<vector <ofxPoint2f> > simpleContours;
-	vector <ofxPoint2f> contourReg;
-	vector <ofxPoint2f> contourSmooth;
-	vector <ofxPoint2f> contourSimple;
-
-	//collision detection variables
-	HandTracking handTracking;
-	ofPoint avgFlow;
-	ofPoint rotation, rotationSmooth;
-	
-	vector<Draggable> draggables;
 	
 	bool bWasHandOpen;	
 	bool bSetup;

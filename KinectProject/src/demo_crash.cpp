@@ -28,6 +28,13 @@
 #include "texturepath.h"
 #include "testApp.h"
 #include <pthread.h>
+#include <iostream>
+
+using namespace std;
+
+char maze[100][100];
+int rows=0;
+int cols=0;
 
 #ifdef _MSC_VER
 #pragma warning(disable:4244 4305)  // for VC++, no precision loss complaints
@@ -63,7 +70,7 @@
 #define ROWS 1			// rows of cars
 #define COLS 1			// columns of cars
 #define ITERS 20		// number of iterations
-#define WBOXSIZE 1.0		// size of wall boxes
+#define WBOXSIZE 10.0		// size of wall boxes
 #define WALLWIDTH 12		// width of wall
 #define WALLHEIGHT 10		// height of wall
 #define DISABLE_THRESHOLD 0.008	// maximum velocity (squared) a body can have and be disabled
@@ -74,13 +81,14 @@
 #define CANNON_BALL_RADIUS 0.5
 
 //#define BOX
-#define CARS
-#define WALL
+//#define CARS
+//#define WALL
 //#define BALLS
 //#define BALLSTACK
 //#define ONEBALL
 //#define CENTIPEDE
-#define CANNON
+//#define CANNON
+#define MAZE
 
 // dynamics and collision objects (chassis, 3 wheels, environment)
 
@@ -98,6 +106,8 @@ static dGeomID sphere[10000];
 static int spheres;
 static dGeomID wall_boxes[10000];
 static dBodyID wall_bodies[10000];
+static dGeomID arm_boxes[4];
+static dBodyID arm_bodies[4];
 static dGeomID cannon_ball_geom;
 static dBodyID cannon_ball_body;
 static int wb_stepsdis[10000];
@@ -156,6 +166,70 @@ static void nearCallback (void *data, dGeomID o1, dGeomID o2)
 	}
 }
 
+void readMaze (){
+	ifstream infile;
+	
+	rows = 0;
+	cols = 0;
+
+	infile.open ("maze.txt");
+
+	if (!infile.is_open()){
+		cout << "Error reading file" << endl;
+		return;
+	}
+
+	infile >> rows;											//reads number of rows
+	infile >> cols;											//reads number of columns
+
+	cout << "Number of rows is " << rows << endl;
+	cout << "Number of columns is " << cols << endl << endl;
+	
+	char nxt;
+	infile.get(nxt);										//stores the first character
+
+	for (int k = 0; k < rows; k++) {						//reads and stores rest of maze
+		for (int i = 0; i < cols; i ++){
+			infile.get(nxt);
+			cout << nxt;									//prints original maze
+			maze[k][i] = nxt;
+		}
+		infile.get(nxt);
+		cout << endl;
+	}
+
+	return;
+}
+
+void createMaze(){
+	for (int i = 0; i < rows; i++){
+		for(int j = 0; j < cols; j++){
+			if(maze[i][j] == '*'){
+				wall_bodies[wb] = dBodyCreate (world);
+				dBodySetPosition (wall_bodies[wb],-WBOXSIZE*j,-WBOXSIZE*i,10);
+				dMassSetBox (&m,1,WBOXSIZE,WBOXSIZE,WBOXSIZE);
+				dMassAdjust (&m, WALLMASS);
+				dBodySetMass (wall_bodies[wb],&m);
+				wall_boxes[wb] = dCreateBox (space,WBOXSIZE,WBOXSIZE,WBOXSIZE*2);
+				dGeomSetBody (wall_boxes[wb],wall_bodies[wb]);
+				wb++;
+			}
+			else if (maze[i][j] == '#') {
+				wall_bodies[wb] = dBodyCreate (world);
+				dBodySetPosition (wall_bodies[wb],-WBOXSIZE*j,-WBOXSIZE*i,10);
+				dMassSetBox (&m,1,WBOXSIZE,WBOXSIZE,WBOXSIZE);
+				dMassAdjust (&m, .5);
+				dBodySetMass (wall_bodies[wb],&m);
+				wall_boxes[wb] = dCreateBox (space,WBOXSIZE,WBOXSIZE,WBOXSIZE*2);
+				dGeomSetBody (wall_boxes[wb],wall_bodies[wb]);
+				//dBodyDisable(wall_bodies[wb++]);
+				wb++;
+			}
+		}
+	}
+
+	return;
+}
 
 // start simulation - set viewpoint
 
@@ -282,7 +356,9 @@ void resetSimulation()
 	boxes = 0;
 	spheres = 0;
 	wb = 0;
-	
+
+	//makeArm();
+
 #ifdef CARS
 	for (dReal x = 0.0; x < COLS*(LENGTH+RADIUS); x += LENGTH+RADIUS)
 		for (dReal y = -((ROWS-1)*(WIDTH/2+RADIUS)); y <= ((ROWS-1)*(WIDTH/2+RADIUS)); y += WIDTH+RADIUS*2)
@@ -290,6 +366,7 @@ void resetSimulation()
 #endif
 #ifdef WALL
 	bool offset = false;
+	
 	for (dReal z = WBOXSIZE/2.0; z <= WALLHEIGHT; z+=WBOXSIZE)
 	{
 		offset = !offset;
@@ -306,6 +383,10 @@ void resetSimulation()
 			wb++;
 		}
 	}
+#endif
+#ifdef MAZE
+	createMaze();
+
 	dMessage(0,"wall boxes: %i", wb);
 #endif
 #ifdef BALLS
@@ -441,7 +522,24 @@ static void command (int cmd)
 {
 	switch (cmd) {
 	case 'a': case 'A':
-		speed += 0.3;
+		//speed += 0.3;
+		shm2->h+=5;
+		if(shm2->h >= 360)
+				shm2->h = 0;
+		break;
+	case 'd': case 'D':
+		//speed += 0.3;
+		shm2->h-=5;
+		if(shm2->h < 0)
+			shm2->h = 355;
+		break;
+	case 'w' : case 'W':
+		shm2->x += cos(shm2->h * PI / 180);
+		shm2->y += sin(shm2->h * PI / 180);
+		break;
+	case 's' : case 'S':
+		shm2->x -= cos(shm2->h * PI / 180);
+		shm2->y -= sin(shm2->h * PI / 180);
 		break;
 	case 'z': case 'Z':
 		speed -= 0.3;
@@ -604,7 +702,7 @@ static void simLoop (int pause)
 	dsSetColor (1,1,1);
 	for (i=0; i< spheres; i++) dsDrawSphere (dGeomGetPosition(sphere[i]),
 				   dGeomGetRotation(sphere[i]),RADIUS);
-	
+	/*
 	// draw the cannon
 	dsSetColor (1,1,0);
 	dMatrix3 R2,R3,R4;
@@ -616,10 +714,11 @@ static void simLoop (int pause)
 	dsDrawBox (cpos,R2,csides);
 	for (i=0; i<3; i++) cpos[i] += 1.5*R4[i*4+2];
 	dsDrawCylinder (cpos,R4,3,0.5);
-	
+	/*
 	// draw the cannon ball
 	dsDrawSphere (dBodyGetPosition(cannon_ball_body),dBodyGetRotation(cannon_ball_body),
 		      CANNON_BALL_RADIUS);
+			  */
 }
 
 void *threadSim(void *arg)
@@ -648,11 +747,13 @@ int main (int argc, char **argv)
 	pthread_t tid[2];
 	int count_thread=0;
 
-	shm2->x=3.8548f;
-	shm2->y=9.0843f;
+	readMaze();
+
+	shm2->x=5.0f;
+	shm2->y=10.0f;
 	shm2->z=7.5900f;
-	shm2->h=-145.5f;
-	shm2->p=-22.5f;
+	shm2->h=215.0f;
+	shm2->p=-12.5f;
 	shm2->r=0.25f;
 	shm2->s=0;
 
