@@ -18,7 +18,7 @@
 #define BALLMASS 1		// ball mass
 
 
-
+//class
 class testApp : public ofBaseApp {
 public:
 	struct shared_data * shm;
