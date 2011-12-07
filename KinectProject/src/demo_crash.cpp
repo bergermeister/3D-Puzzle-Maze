@@ -29,6 +29,8 @@
 #include "testApp.h"
 #include <pthread.h>
 
+
+
 #ifdef _MSC_VER
 #pragma warning(disable:4244 4305)  // for VC++, no precision loss complaints
 #endif
@@ -49,11 +51,11 @@
 
 // some constants
 
-#define LENGTH 3.5		// chassis length
-#define WIDTH 2.5		// chassis width
-#define HEIGHT 1.0		// chassis height
-#define RADIUS 0.5		// wheel radius
-#define STARTZ 1.0		// starting height of chassis
+#define LENGTH 1.0		// chassis length
+#define WIDTH 1.5		// chassis width
+#define HEIGHT 3.0		// chassis height
+#define RADIUS 0.3		// hand radius
+#define STARTZ 3.0		// starting height of chassis
 #define CMASS 1			// chassis mass
 #define WMASS 1			// wheel mass
 #define COMOFFSET -5		// center of mass offset
@@ -106,9 +108,8 @@ static bool doFast;
 static dBodyID b;
 static dMass m;
 
-
 // things that the user controls
-
+dReal xT=0,yT=0,zT=0;
 static dReal turn = 0, speed = 0;	// user commands
 static dReal cannon_angle=0,cannon_elevation=-1.2;
 
@@ -126,7 +127,6 @@ struct shared_data * shm2 = (struct shared_data *)malloc(sizeof(struct shared_da
 
 // this is called by dSpaceCollide when two objects in space are
 // potentially colliding.
-
 static void nearCallback (void *data, dGeomID o1, dGeomID o2)
 {
 	int i,n;
@@ -158,7 +158,6 @@ static void nearCallback (void *data, dGeomID o1, dGeomID o2)
 
 
 // start simulation - set viewpoint
-
 static void start()
 {
 	dAllocateODEDataForThread(dAllocateMaskAll);
@@ -187,7 +186,7 @@ void makeCar(dReal x, dReal y, int &bodyI, int &jointI, int &boxI, int &sphereI)
 {
 	int i;
 	dMass m;
-	
+
 	// chassis body
 	body[bodyI] = dBodyCreate (world);
 	dBodySetPosition (body[bodyI],x,y,STARTZ);
@@ -196,56 +195,16 @@ void makeCar(dReal x, dReal y, int &bodyI, int &jointI, int &boxI, int &sphereI)
 	dBodySetMass (body[bodyI],&m);
 	box[boxI] = dCreateBox (space,LENGTH,WIDTH,HEIGHT);
 	dGeomSetBody (box[boxI],body[bodyI]);
-	
-	// wheel bodies
-	for (i=1; i<=4; i++) {
-		body[bodyI+i] = dBodyCreate (world);
-		dQuaternion q;
-		dQFromAxisAndAngle (q,1,0,0,M_PI*0.5);
-		dBodySetQuaternion (body[bodyI+i],q);
-		dMassSetSphere (&m,1,RADIUS);
-		dMassAdjust (&m,WMASS);
-		dBodySetMass (body[bodyI+i],&m);
-		sphere[sphereI+i-1] = dCreateSphere (space,RADIUS);
-		dGeomSetBody (sphere[sphereI+i-1],body[bodyI+i]);
-	}
-	dBodySetPosition (body[bodyI+1],x+0.4*LENGTH-0.5*RADIUS,y+WIDTH*0.5,STARTZ-HEIGHT*0.5);
-	dBodySetPosition (body[bodyI+2],x+0.4*LENGTH-0.5*RADIUS,y-WIDTH*0.5,STARTZ-HEIGHT*0.5);
-	dBodySetPosition (body[bodyI+3],x-0.4*LENGTH+0.5*RADIUS,y+WIDTH*0.5,STARTZ-HEIGHT*0.5);
-	dBodySetPosition (body[bodyI+4],x-0.4*LENGTH+0.5*RADIUS,y-WIDTH*0.5,STARTZ-HEIGHT*0.5);
-	
-	// front and back wheel hinges
-	for (i=0; i<4; i++) {
-		joint[jointI+i] = dJointCreateHinge2 (world,0);
-		dJointAttach (joint[jointI+i],body[bodyI],body[bodyI+i+1]);
-		const dReal *a = dBodyGetPosition (body[bodyI+i+1]);
-		dJointSetHinge2Anchor (joint[jointI+i],a[0],a[1],a[2]);
-		dJointSetHinge2Axis1 (joint[jointI+i],0,0,(i<2 ? 1 : -1));
-		dJointSetHinge2Axis2 (joint[jointI+i],0,1,0);
-		dJointSetHinge2Param (joint[jointI+i],dParamSuspensionERP,0.8);
-		dJointSetHinge2Param (joint[jointI+i],dParamSuspensionCFM,1e-5);
-		dJointSetHinge2Param (joint[jointI+i],dParamVel2,0);
-		dJointSetHinge2Param (joint[jointI+i],dParamFMax2,FMAX);
-	}
-	
-	//center of mass offset body. (hang another copy of the body COMOFFSET units below it by a fixed joint)
-	dBodyID b = dBodyCreate (world);
-	dBodySetPosition (b,x,y,STARTZ+COMOFFSET);
-	dMassSetBox (&m,1,LENGTH,WIDTH,HEIGHT);
-	dMassAdjust (&m,CMASS/2.0);
-	dBodySetMass (b,&m);
-	dJointID j = dJointCreateFixed(world, 0);
-	dJointAttach(j, body[bodyI], b);
-	dJointSetFixed(j);
-	//box[boxI+1] = dCreateBox(space,LENGTH,WIDTH,HEIGHT);
-	//dGeomSetBody (box[boxI+1],b);
-	
-	bodyI	+= 5;
-	jointI	+= 4;
-	boxI	+= 1;
-	sphereI	+= 4;
-}
 
+	xT = x;
+	yT = y;
+	zT = STARTZ;
+
+	bodyI	+= 5;
+	//jointI	+= 4;
+	boxI	+= 1;
+	//sphereI	+= 4;
+}
 
 void resetSimulation()
 {
@@ -282,11 +241,14 @@ void resetSimulation()
 	boxes = 0;
 	spheres = 0;
 	wb = 0;
-	
+
+	//person();
+
 #ifdef CARS
 	for (dReal x = 0.0; x < COLS*(LENGTH+RADIUS); x += LENGTH+RADIUS)
 		for (dReal y = -((ROWS-1)*(WIDTH/2+RADIUS)); y <= ((ROWS-1)*(WIDTH/2+RADIUS)); y += WIDTH+RADIUS*2)
 			makeCar(x, y, bodies, joints, boxes, spheres);
+
 #endif
 #ifdef WALL
 	bool offset = false;
@@ -442,24 +404,31 @@ static void command (int cmd)
 	switch (cmd) {
 	case 'a': case 'A':
 		speed += 0.3;
+		xT+=0.3;
 		break;
 	case 'z': case 'Z':
 		speed -= 0.3;
+		xT-=0.3;
 		break;
 	case ',':
+		yT+=0.3;
 		turn += 0.1;
 		if (turn > 0.3)
 			turn = 0.3;
 		break;
 	case '.':
+		yT-=0.3;
 		turn -= 0.1;
 		if (turn < -0.3)
 			turn = -0.3;
 		break;
 	case ' ':
+		zT+=0.3;
 		speed = 0;
 		turn = 0;
 		break;
+
+
 	case 'f': case 'F':
 		doFast = !doFast;
 		break;
@@ -500,11 +469,23 @@ static void command (int cmd)
 	}
 }
 
+float * convertToArray(float t[], float xyz[]){
+	t[2] = 5;
+	cout<<t[0]<<endl;
+	cout<<t[1]<<endl;
+	cout<<t[2]<<endl;
+	cout<<endl<<endl;
+
+	t[0] += xyz[0];
+	t[1] += xyz[1];
+	return t;
+}
 
 // simulation loop
 
 static void simLoop (int pause)
 {
+	
 	int i, j;
 
 	dsSetTexture (DS_WOOD);
@@ -512,23 +493,13 @@ static void simLoop (int pause)
 	float xyz[3]={shm2->x, shm2->y, shm2->z};
 	float hpr[3] = {shm2->h, shm2->p, shm2->r};
 	//float hpr[3] = {-145.5f,-22.5f,0.25f};
-	dsSetViewpoint (xyz,hpr);
+	//dsSetViewpoint (xyz,hpr);
 
 	if (!pause) {
 #ifdef BOX
 		dBodyAddForce(body[bodies-1],lspeed,0,0);
 #endif
-		for (j = 0; j < joints; j++)
-		{
-			dReal curturn = dJointGetHinge2Angle1 (joint[j]);
-			//dMessage (0,"curturn %e, turn %e, vel %e", curturn, turn, (turn-curturn)*1.0);
-			dJointSetHinge2Param(joint[j],dParamVel,(turn-curturn)*1.0);
-			dJointSetHinge2Param(joint[j],dParamFMax,dInfinity);
-			dJointSetHinge2Param(joint[j],dParamVel2,speed + shm2->s);
-			dJointSetHinge2Param(joint[j],dParamFMax2,FMAX);
-			dBodyEnable(dJointGetBody(joint[j],0));
-			dBodyEnable(dJointGetBody(joint[j],1));
-		}		
+	
 		if (doFast)
 		{
 			dSpaceCollide (space,0,&nearCallback);
@@ -599,11 +570,22 @@ static void simLoop (int pause)
 	
 	dsSetColor (0,1,1);
 	dReal sides[3] = {LENGTH,WIDTH,HEIGHT};
-	for (i = 0; i < boxes; i++)
+	for (i = 0; i < boxes; i++){
+		dBodySetPosition (body[0],shm2->x,shm2->y,zT);
+		dsSetViewpoint (xyz,hpr);
+		//dsSetViewpoint (convertToArray((float *)dGeomGetPosition(box[i]), xyz),hpr);
 		dsDrawBox (dGeomGetPosition(box[i]),dGeomGetRotation(box[i]),sides);
+		
+	}
 	dsSetColor (1,1,1);
-	for (i=0; i< spheres; i++) dsDrawSphere (dGeomGetPosition(sphere[i]),
-				   dGeomGetRotation(sphere[i]),RADIUS);
+	//for (i=0; i< 2; i++) 
+	//{
+	//dBodySetPosition (body[1],xT,yT,zT);
+	//dsDrawSphere (dGeomGetPosition(sphere[1]),dGeomGetRotation(sphere[1]) ,RADIUS);
+
+	//dBodySetPosition (body[3],xT,shm2->right,zT);
+	//dsDrawSphere (dGeomGetPosition(sphere[3]),dGeomGetRotation(sphere[3]) ,RADIUS);
+	//}
 	
 	// draw the cannon
 	dsSetColor (1,1,0);
@@ -620,6 +602,9 @@ static void simLoop (int pause)
 	// draw the cannon ball
 	dsDrawSphere (dBodyGetPosition(cannon_ball_body),dBodyGetRotation(cannon_ball_body),
 		      CANNON_BALL_RADIUS);
+
+	
+
 }
 
 void *threadSim(void *arg)
@@ -635,7 +620,7 @@ void *threadSimK(void *arg)
 	// run simulation
 	
 	ofAppGlutWindow window;
-	ofSetupOpenGL(&window, 1024, 768, OF_WINDOW);
+	ofSetupOpenGL(&window, 400, 850, OF_WINDOW);
 	ofRunApp(new testApp(shm2));
 
 	done[1]=1;
@@ -655,6 +640,8 @@ int main (int argc, char **argv)
 	shm2->p=-22.5f;
 	shm2->r=0.25f;
 	shm2->s=0;
+	shm2->left=0;
+	shm2->right=0;
 
 	doFast = true;
 	

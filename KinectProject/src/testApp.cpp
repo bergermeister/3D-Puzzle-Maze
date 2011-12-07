@@ -7,82 +7,11 @@ bool flag=false;
 int footF=0;
 int directionF=0;
 /*
-1 = left
-2 = right
+1 = right
+2 = left
 1 = foward
 2 = back
 */
-
-
-void ode::reset()
-{	
-		world = dWorldCreate();
-		space = dSweepAndPruneSpaceCreate(0, dSAP_AXES_XYZ );
-		
-		dWorldSetGravity (world,0,300,0);
-		dWorldSetCFM (world, 1e-5);
-		dWorldSetERP (world, 0.8);
-		//dWorldSetQuickStepNumIterations (world,ITERS);
-		ground = dCreatePlane (space,0,0,100,0);
-
-}
-void ode::newBall(int xp, int yp)
-{ 
-		dReal z=1,y=1,x=1;
-	
-		b = dBodyCreate (world);
-		dBodySetPosition (b,xp,yp,2);
-		dMassSetSphere (&m,1,RADIUS);
-		dMassAdjust (&m, 1);
-		dBodySetMass (b,&m);
-		sphere[spheres] = dCreateSphere (space,RADIUS);
-		dGeomSetBody (sphere[spheres++],b);		
-}
-void ode::newLine(float xp, float yp)
-{
-		b = dBodyCreate (world);
-		dBodySetPosition (b,xp,yp,2);
-		//dMassSetSphere (&m,1,RADIUS);
-		dMassAdjust (&m, 1);
-		dBodySetMass (b,&m);
-		lineStrips[lines] = dCreateSphere (space,RADIUS);
-		dGeomSetBody (lineStrips[lines++],b);		
-}
-void ode::drawBall()
-{
-	dsSetTexture (DS_WOOD);
-	dWorldQuickStep (world,0.05);
-
-	dsSetColor(0.4,0,0);
-
-	for (int i=0; i< spheres; i++)
-	{ 
-		dsDrawSphere (dGeomGetPosition(sphere[i]),dGeomGetRotation(sphere[i]),RADIUS);
-	}
-	
-}
-void ode::drawLines()
-{
-	dsSetTexture (DS_WOOD);
-	//dWorldQuickStep (world,0.05);
-
-	dsSetColor(1,0,0);
-	//const dReal *temp1=dGeomGetPosition(lineStrips[0]);
-	
-	for (int i=0; i< contourX.size(); i++)
-	{ 
-		float tempX[3];
-		tempX[0]=contourX[i][0];
-		tempX[0]=contourX[i][1];
-		tempX[0]=contourX[i][2];
-		float tempY[3];
-		tempY[0]=contourY[i][0];
-		tempY[0]=contourY[i][1];
-		tempY[0]=contourY[i][2];
-		//dsDrawLine(tempX,tempY);
-	}
-	flag=false;
-}
 
 
 //--------------------------------------------------------------
@@ -96,39 +25,49 @@ void testApp::setCalibrationOffset(float x, float y) {
 void testApp::drawFigures()
 {
 	switch(directionF){
-		case 1:  //left
+		case 1:  //right
 			glColor3f(1.0, 0.0, 0.0);    //red
 			glBegin(GL_QUADS);
-			glTexCoord2f(0, 0);
-			glVertex3f(780, 780, 0.0f);
-			glTexCoord2f(1, 0);
-			glVertex3f(790, 780, 0.0f);
-			glTexCoord2f(1, 1);
-			glVertex3f(790, 590, 0.0f);
-			glTexCoord2f(0, 1);
-			glVertex3f(780, 590, 0.0f);
+				glTexCoord2f(0, 0);
+				glVertex3f(200, 850, 0.0f);
+				glTexCoord2f(1, 0);
+				glVertex3f(220, 850, 0.0f);
+				glTexCoord2f(1, 1);
+				glVertex3f(220, 750, 0.0f);
+				glTexCoord2f(0, 1);
+				glVertex3f(200, 750, 0.0f);
 			glEnd();
-			if(shm->h >= 360)
-				shm->h = 0;
+			if(shm->h <= 0)
+			{
+				shm->h = 360;
+			}
 			else
-				shm->h+=5;
+			{
+				shm->h-=5;
+			}
+			//shm->left -= .3;
 			break;
-		case 2:  //right
+		case 2:  //left
 			glColor3f(0.0, 0.0, 1.0);    //blue
 			glBegin(GL_QUADS);
 			glTexCoord2f(0, 0);
-			glVertex3f(780, 780, 0.0f);
-			glTexCoord2f(1, 0);
-			glVertex3f(790, 780, 0.0f);
-			glTexCoord2f(1, 1);
-			glVertex3f(790, 590, 0.0f);
-			glTexCoord2f(0, 1);
-			glVertex3f(780, 590, 0.0f);
+				glVertex3f(200, 850, 0.0f);
+				glTexCoord2f(1, 0);
+				glVertex3f(220, 850, 0.0f);
+				glTexCoord2f(1, 1);
+				glVertex3f(220, 750, 0.0f);
+				glTexCoord2f(0, 1);
+				glVertex3f(200, 750, 0.0f);
 			glEnd();
-			if(shm->h <= 0)
-				shm->h = 360;
+			if(shm->h >= 360)
+			{
+				shm->h = 0;
+			}
 			else
-				shm->h-= 5;
+			{
+				shm->h+= 5;
+			}
+			//shm->left += .3;
 			break;
 	}
 	
@@ -136,32 +75,33 @@ void testApp::drawFigures()
 	case 1:   //up
 		glColor3f(0.0, 1.0, 1.0);    //light blue
 		glBegin(GL_QUADS);
-		glTexCoord2f(0, 0);
-		glVertex3f(800, 800, 0.0f);
-		glTexCoord2f(1, 0);
-		glVertex3f(790, 800, 0.0f);
-		glTexCoord2f(1, 1);
-		glVertex3f(790, 590, 0.0f);
-		glTexCoord2f(0, 1);
-		glVertex3f(800, 590, 0.0f);
-		glEnd();
+			glTexCoord2f(0, 0);
+			glVertex3f(220, 850, 0.0f);
+			glTexCoord2f(1, 0);
+			glVertex3f(240, 850, 0.0f);
+			glTexCoord2f(1, 1);
+			glVertex3f(240, 750, 0.0f);
+			glTexCoord2f(0, 1);
+			glVertex3f(220, 750, 0.0f);
+		glEnd();  
 		shm->x += cos(shm->h * PI / 180);
 		shm->y += sin(shm->h * PI / 180);
-		//shm->s+=0.3;
+		shm->s+=0.3;
 		break;
 	case 2:   //back -- stop
 		glColor3f(0.0, 0.0, 0.0);    //black
 		glBegin(GL_QUADS);
-		glTexCoord2f(0, 0);
-		glVertex3f(800, 800, 0.0f);
-		glTexCoord2f(1, 0);
-		glVertex3f(790, 800, 0.0f);
-		glTexCoord2f(1, 1);
-		glVertex3f(790, 590, 0.0f);
-		glTexCoord2f(0, 1);
-		glVertex3f(800, 590, 0.0f);
-		shm->s = 0;
+			glTexCoord2f(0, 0);
+			glVertex3f(220, 850, 0.0f);
+			glTexCoord2f(1, 0);
+			glVertex3f(240, 850, 0.0f);
+			glTexCoord2f(1, 1);
+			glVertex3f(240, 750, 0.0f);
+			glTexCoord2f(0, 1);
+			glVertex3f(220, 750, 0.0f);
 		glEnd();  
+		shm->s = 0;
+		
 		break;
 	
 	}
@@ -169,7 +109,6 @@ void testApp::drawFigures()
 //--------------------------------------------------------------
 void testApp::setup() {
 
-	physics.spheres=0;
 	ofSetLogLevel(OF_LOG_VERBOSE);
 	
     // enable depth->rgb image calibration
@@ -180,27 +119,17 @@ void testApp::setup() {
 	//kinect.init(false, false); // disable video image (faster fps)
 	
 	kinect.open();
-	// HAND T.
-	/*ofEnableSmoothing(); 
-	bWasHandOpen = false;
-	oldNumBlobs = 0;
-	
-	bSetup = true;
-	bHandBusy = false;
-	for(int i=0; i<20; ++i){draggables.push_back( Draggable() );}
 
-	kinect.getCalibratedColorAt(60, 230);*/
+	//kinect.getCalibratedColorAt(60, 230);
 	
-
 	//Allocate space for all images
 	colorImg.allocate(kinect.width, kinect.height);
-	colorDiff.allocate(kinect.width, kinect.height);
-	colorBg.allocate(kinect.width, kinect.height);
 
 	grayImage.allocate(kinect.width, kinect.height);
 	grayBg.allocate(kinect.width, kinect.height);
 	grayDiff.allocate(kinect.width, kinect.height);
 	footDiff.allocate(kinect.width, kinect.height );
+	handDiff.allocate(kinect.width, kinect.height );
 
 	grayThreshNear.allocate(kinect.width, kinect.height);
 	grayThreshFar.allocate(kinect.width, kinect.height);
@@ -223,9 +152,6 @@ void testApp::setup() {
 	
 	// Set depth map so near values are higher (white)
 	kinect.enableDepthNearValueWhite(true);
-	// Set which direction virtual camera is animating
-	eyeDir = 1;
-
 	ofSetFrameRate(30);
 	
 	// zero the tilt on startup
@@ -234,14 +160,8 @@ void testApp::setup() {
 	
 	// start from the front
 	bDrawPointCloud = false;
-	bDrawDepthMap = false;
-	bDrawGrayImage = false;
 	bDrawContourFinder = false;
-	bDrawGrayDiff = false;
-	bDrawColorDiff = false;
 
-	physics.reset();
-	
 }
 
 //--------------------------------------------------------------
@@ -250,14 +170,11 @@ void testApp::update() {
 	ofBackground(100, 100, 100);
 	kinect.update();
 	
-	//clearing old collision lines
-	physics.lines=0;
-	simpleContours.clear();
-
 	// load grayscale depth image from the kinect source
 	grayImage.setFromPixels(kinect.getDepthPixels(), kinect.width, kinect.height);
 	colorImg.setFromPixels(kinect.getPixels(), kinect.width, kinect.height);
 	colorImg.getCvImage();
+	
 
 	// Quick and dirty noise filter on the depth map. Needs work
 	grayImage.dilate();
@@ -267,187 +184,38 @@ void testApp::update() {
 	if (bLearnBakground == true)
 	{
 		grayBg = grayImage;
-		colorBg = colorImg;
 		bLearnBakground = false;
 	}
 	// Subtract the saved background from the current one
 	grayDiff = grayImage;
 	grayDiff -= grayBg;
-	colorDiff = colorImg;
-	colorDiff-=colorBg;
-	/*//Detecting Hand
-	handTracking.detect( kinect.getDepthPixels() );
-	//handTracking.filterDefects();
 
-	// Getting	Blobs
-	vector<ofxCvBlobWithDefects>& blobs = handTracking.getBlobs();
-	
-	bool bIsHandOpen = false;
-	ofPoint screenPos;
-	if(blobs.size() > 0)
-	{
-		ofxCvBlobWithDefects& blob = blobs.front();
-		screenPos = blobs.front().centroid;
-		screenPos.x *= (float)ofGetWidth() / 640.0f;
-		screenPos.y *= (float)ofGetHeight() / 480.0f;
-		int numDefects = blob.defects.size();
-		bIsHandOpen = numDefects >= 3;
-	}
-	else
-	{
-		bIsHandOpen = false;
-		bWasHandOpen = false;
-	}
-	
-	if(blobs.size() && oldNumBlobs) // && blobs.size()>0)
-	{
-		if(bIsHandOpen && !bWasHandOpen)
-		{
-			for(vector<Draggable>::iterator it = draggables.begin(); it != draggables.end(); ++it)
-			{
-				it->setDrag( false );
-			}
-			bHandBusy = false;
-		}
-		if(!bIsHandOpen && bWasHandOpen)
-		{
-			for(vector<Draggable>::iterator it = draggables.begin(); it != draggables.end(); ++it)
-			{
-				Draggable& draggable = *it;
-				if(draggable.isInside(screenPos))
-				{
-					draggable.setDrag( true );
-					bHandBusy = true;
-					break;
-				}
-			}
-		}
-	}
-	
-	if(blobs.size())
-	{
-		for(vector<Draggable>::iterator it = draggables.begin(); it != draggables.end(); ++it)
-		{
-			Draggable& draggable = *it;
-			if(!bIsHandOpen && draggable.isDrag())
-			{
-				draggable.goTo( screenPos );
-			}
-			else
-			{
-				if(bHandBusy) continue;
-				draggable.isInside( screenPos );
-			}
-		}
-	}
-	
-	if(!oldNumBlobs && !blobs.size())
-	{
-		bIsHandOpen = false;
-		bWasHandOpen = false;
-	}
-	
-	bWasHandOpen = bIsHandOpen;
-	oldNumBlobs = blobs.size();
-	
-	for(vector<Draggable>::iterator it = draggables.begin(); it != draggables.end(); it++)
-	{
-		it->update();
-	}*/
-
-	// there is a new frame and we are connected
-
-	/*
-	if(kinect.isFrameNew())
-	{
-		// we do two thresholds - one for the far plane and one for the near plane
-		// we then do a cvAnd to get the pixels which are a union of the two thresholds
-		if(bThreshWithOpenCV) {
-			grayThreshNear = grayImage;
-			grayThreshFar = grayImage;
-			grayThreshNear.threshold(nearThreshold, true);
-			grayThreshFar.threshold(farThreshold);
-			cvAnd(grayThreshNear.getCvImage(), grayThreshFar.getCvImage(), grayImage.getCvImage(), NULL);
-		} 
-		else 
-		{	
-			// or we do it ourselves - show people how they can work with the pixels
-			unsigned char * pix = grayImage.getPixels();
-			
-			int numPixels = grayImage.getWidth() * grayImage.getHeight();
-			for(int i = 0; i < numPixels; i++) {
-				if(pix[i] < nearThreshold && pix[i] > farThreshold) {
-					pix[i] = 255;
-				} else {
-					pix[i] = 0;
-				}
-			}
-		}
-		contourFinder.findContours(grayDiff, 10, (kinect.width*kinect.height)/2, 20, false);
-
-		// getgting line contour for collisions
-		for(int i=0; i<contourFinder.blobs.size(); i++)
-		{
-			if (contourFinder.blobs[i].nPts != -1) 
-			{
-				int numPoints = contourFinder.blobs[i].nPts;
-				contourReg.clear();
-				contourSmooth.clear();
-				contourSimple.clear();
-				contourReg.assign(numPoints, ofxPoint2f());
-				contourSmooth.assign(numPoints, ofxPoint2f());
-			
-				for(int j = 0; j < numPoints; j++) { contourReg[j] = contourFinder.blobs[i].pts[j];}
-			
-				contourSimp.smooth(contourReg, contourSmooth, smoothPct);
-				contourSimp.simplify(contourSmooth, contourSimple, tolerance);
-				simpleContours.push_back(contourSimple);
-			}
-		}
-
-		for (float f = 0;f<contourSimple.size(); f++) 
-		{
-			vector<float> temp;
-			temp.push_back(contourSimple[f].x);
-			temp.push_back(1);
-			temp.push_back(0);
-			//physics.contourX.push_back(temp);
-			temp.clear();
-			temp.push_back(contourSimple[f].y);
-			temp.push_back(contourSimple[f].y);
-			temp.push_back(1);
-			temp.push_back(0);
-			//physics.contourY.push_back(temp);
-			if(physics.lines<1000){	physics.newLine(contourSimple[f].x, kinect.height+contourSimple[f].y);}
-		}
-				
-	}
-	*/
-		
 	grayDiff.threshold(1);    // anything that is > 1 has changed, so keep it
 	grayDiff *= grayImage;    // multiply in the current depth values, to mask it 
-	//colorDiff *=colorImg;
-	//grayDiff.threshold(threshold);  // cut off anything that is too far away
-
 	// Copy the filtered depthmap so we can use it for detecting feet 
 	footDiff= grayDiff;
-
+	handDiff=grayDiff;
+	
 	// for feet we want to focus on only the bottom part of the image (et the region of interest to the bottom 180 px)
-	footDiff.setROI(0, 300,footDiff.width, footDiff.height/2);
+	footDiff.setROI(0,300,footDiff.width, footDiff.height/2);
+	handDiff.setROI(0,0,handDiff.width, handDiff.height/2);
 	
 	// cut off anything that is too far away
-    grayDiff.threshold(farThreshold); // TODO: This should be configurable as well
-	footDiff.threshold(farThreshold);
-
+     grayDiff.threshold(farThreshold);
+	 footDiff.threshold(farThreshold);
+	 handDiff.threshold(farThreshold);
 	// since we set ROI, we need to reset it
 	footDiff.resetROI();
+	handDiff.resetROI();
 	// also, since ROI was on when we did the above threshold we clear out all pixels that are not fully white 
 	//(which ends up being only the upper part of the iamge)
 	footDiff.threshold(nearThreshold);
-	
-	
+	handDiff.threshold(nearThreshold);
+
+	handDiff.mirror(false,true);
+	footDiff.mirror(false,true);
 	// Find blobs (should be hands and foot) in the filtered depthmap
-	contourFinder.findContours(grayDiff, 1000, (kinect.width*kinect.height)/2, 5, false);
+	contourFinder.findContours(handDiff, 1000, (kinect.width*kinect.height)/2, 5, false);
 	footContourFinder.findContours(footDiff, 1000, (kinect.width*kinect.height)/2, 5, false);
 	
 	// if at least 2 blobs were detected (presumably 2 hands), figure out
@@ -464,49 +232,62 @@ void testApp::update() {
 		ofPoint p1(x1<x2 ? x1 : x2,x1<x2 ? y1 : y2, 0);
 		ofPoint p2(x2<x1 ? x1 : x2,x2<x1 ? y1 : y2, 0);
 
-		// if the "steering wheel" is sufficently rotated
-		if(abs(p1.y-p2.y) > 50)
-		{
-			if(p1.y < p2.y ){ // turning left
+			if(p1.y > p2.y ) // turning right if left hand raised
+			{
 				if(!leftDown){ // if left is already down, dont send key even again
 					// Send the key down event for left, and up event for right
+
+					shm->right += .5;
+					shm->rightH =p1.y/300;
+
+					shm->left -= .5;
+					shm->leftH =p1.y/300;
+
 					directionF=1;
 					leftDown = true;
 					rightDown = false;
 				}
 			}
-			else  // turning right
+			else if(p1.y < p2.y )  // turning left if right hand raised
 			{ 
-				if(!rightDown){ // if left is already down, dont send key even again
+				if(!rightDown) // if left is already down, dont send key even again
+				{
 					// Send the key down event for right, and up event for left
+					shm->left += .5;
+					shm->leftH =p1.y/300;
+
+					shm->right -= .5;
+					shm->rightH =p1.y/300;
+
 					directionF=2;
 					rightDown = true;
 					leftDown = false;
 				}
 			}
-		} 
-		else  // "steering weheel" centered so moving straight
-		{
-			if(leftDown){
-				directionF=0;
-				leftDown = false;
+			else  // hands centered so moving straight
+			{
+				if(leftDown)
+				{
+					directionF=0;
+					leftDown = false;
+				}
+				if(rightDown)
+				{
+					directionF=0;
+					rightDown = false;
+				}
 			}
-			if(rightDown){
-				directionF=0;
-				rightDown = false;
-			}
-		}
 	}
-	// no hands detected
+	// no hands detected so moving straight
 	else 
 	{ 
-		if(leftDown){
-			footF=0;
+		if(leftDown)
+		{
 			directionF=0;
 			leftDown = false;
 		}
-		if(rightDown){
-			footF=0;
+		if(rightDown)
+		{
 			directionF=0;
 			rightDown = false;
 		}
@@ -515,15 +296,17 @@ void testApp::update() {
 	if(footContourFinder.blobs.size() >= 1) 
 	{
 		//ofBackground(0,255,0); // set background to green for debugging
-		if(!footDown) {   //moving foward
+		if(!footDown)    //moving foward
+		{
 			footF= 1;
 			footDown = true;
 		}
 	} 
 	else 
 	{
-		ofBackground(100,100,100);
-		if(footDown) {
+		//ofBackground(100,100,100);
+		if(footDown) 
+		{
 			footF=2;   //stop
 			footDown = false;
 		}
@@ -540,14 +323,15 @@ void testApp::draw() {
 	ofSetColor(255, 255, 255);
 
 	// Draw some debug images along the top
-	kinect.drawDepth(10, 10, 315, 236);
-	grayDiff.draw(335, 10, 315, 236);
-	footDiff.draw(660, 10, 315, 236);
+	handDiff.draw(20, 256, 315, 236);
+	footDiff.draw(20, 502, 315, 236);
 	
 	// Draw a larger image of the calibrated RGB camera and overlay the found blobs on top of it
-	colorImg.draw(10,256);
-	contourFinder.draw(10,256);
-	//footContourFinder.draw(10,256);
+	colorImg.mirror(false,true);
+	colorImg.draw(20, 10, 315, 236);
+
+	contourFinder.draw(20, 10, 315, 236);
+	footContourFinder.draw(20, 10, 315, 236);
 		
 	// Display some debugging info
 	char reportStr[1024];
@@ -557,29 +341,7 @@ void testApp::draw() {
 	
 	drawFigures();
 	
-	/*if(bSetup)
-	{
-		handTracking.drawSetup();
-		
-		glColor3f(1.0f, 1.0f, 1.0f);
-		ofPoint center = ofPoint(ofGetWidth() / 2.0f, ofGetHeight() / 2.0f );
-		glBegin(GL_LINES);
-		glVertex2f( center.x, center.y );
-		glVertex2f(center.x + (avgFlow.x * 5), center.y + (avgFlow.y * 5) );
-		glEnd();
-		
-	}
-	else
-	{
-		handTracking.draw();
-		for(vector<Draggable>::iterator it = draggables.begin(); it != draggables.end(); ++it)
-		{
-			it->draw();
-		}
-	}
-	glColor3f(1.0f, 1.0f, 1.0f);
-	kinect.getTextureReference().draw(ofGetWidth() - 180, ofGetHeight() - 140, 160, 120); 
-	*/
+	
 	if(bDrawPointCloud) 
 	{
 		easyCam.begin();
@@ -589,25 +351,7 @@ void testApp::draw() {
 	
 	else if(bDrawContourFinder) { contourFinder.draw(0,0, 1024, 768);}
 	
-	if(physics.spheres>0){physics.drawBall();}
-	if(physics.lines>0 && flag==true){physics.drawLines();}
-
-	// draw instructions
-	ofSetColor(255, 255, 255);
-	stringstream reportStream;
-	reportStream << "accel is: " << ofToString(kinect.getMksAccel().x, 2) << " / "
-	<< ofToString(kinect.getMksAccel().y, 2) << " / "
-	<< ofToString(kinect.getMksAccel().z, 2) << endl
-	<< "press p to switch between images and point cloud, rotate the point cloud with the mouse" << endl
-	<< "using opencv threshold = " << bThreshWithOpenCV <<" (press spacebar)" << endl
-	<< "set near threshold " << nearThreshold << " (press: + -)" << endl
-	<< "set far threshold " << farThreshold << " (press: < >) num blobs found " << contourFinder.nBlobs
-	<< ", fps: " << ofGetFrameRate() << endl
-	<< "press c to close the connection and o to open it again, connection is: " << kinect.isConnected() << endl
-	<< "press UP and DOWN to change the tilt angle: " << angle << " degrees" << endl;
-	ofDrawBitmapString(reportStream.str(),20,652);
 	
-
 }
 
 //--------------------------------------------------------------
@@ -648,7 +392,6 @@ void testApp::keyPressed (int key) {
 	switch (key) {
 		case ' ':
 			bThreshWithOpenCV = !bThreshWithOpenCV;
-			bDrawColorDiff=false;
 			break;	
 		case 'b':
 			bLearnBakground = true;
@@ -656,17 +399,11 @@ void testApp::keyPressed (int key) {
 		case'p':
 			bDrawPointCloud = !bDrawPointCloud;
 			bDrawContourFinder = false;
-			bDrawColorDiff=false;
 			break;
 		case 'c':
 			bDrawContourFinder=!bDrawContourFinder;
 			bDrawPointCloud = false;
-			bDrawColorDiff=false;
 			break;
-		case'i':
-			bDrawColorDiff = !bDrawColorDiff;
-			bDrawPointCloud = false;
-			bDrawContourFinder = false;
 		break;
 		case 'x':
 			flag=true;
@@ -706,12 +443,7 @@ void testApp::keyPressed (int key) {
 			kinect.setCameraTiltAngle(0); // zero the tilt
 			kinect.close();
 			break;
-		case 'q':
-			physics.newBall(mouseX, mouseY);	
-			break;
-		case 'h':
-			bSetup = !bSetup;
-			break;
+
 		case OF_KEY_UP:
 			angle++;
 			if(angle>30) angle=30;
@@ -747,10 +479,7 @@ void testApp::keyReleased(int key){
 }
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button)
-{
-	eyeX = x-(ofGetWidth()/2);
-	eyeY = y-(ofGetHeight()/2);
-}
+{}
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button)

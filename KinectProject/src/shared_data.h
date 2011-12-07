@@ -6,4 +6,9 @@ struct shared_data {
 	float p;
 	float r;
 	float s;
+
+	float left;
+	float right;
+	float leftH;
+	float rightH;
 };
