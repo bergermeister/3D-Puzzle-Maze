@@ -82,6 +82,7 @@
       <Filter>addons\ofxKinect\src</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+<<<<<<< HEAD
     <ClInclude Include="..\..\..\addons\ofxCvConvexityDefects\src\ofxCvBlobWithDefects.h">
       <Filter>addons\ofxCvConvexityDefects\src</Filter>
     </ClInclude>
@@ -100,6 +101,8 @@
     <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClInclude>
+=======
+>>>>>>> 46318e58862fb4a7ac2e837ccca9f55d27f3e3fb
     <ClInclude Include="src\shared_data.h" />
   </ItemGroup>
   <ItemGroup>
