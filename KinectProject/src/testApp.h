@@ -65,8 +65,13 @@ public:
 	// state variables for the keypresses, so we dont
 	// send multiple key up or key down events
 	bool footDown;
+	bool footBDown;
+	bool footFDown;
+
 	bool leftDown;
 	bool rightDown;
+	bool turnL;
+	bool turnR;
 
 	//bool variables to know what we drawing
 	bool bThreshWithOpenCV;
@@ -84,8 +89,6 @@ public:
 	float xOff;
 	float yOff;
 	
-	// Used to store the masked RGB iamge of the forgeground object
-	ofTexture maskedImg;
 
 	// Flag to capture the background in the next update()
 	bool bLearnBakground;
